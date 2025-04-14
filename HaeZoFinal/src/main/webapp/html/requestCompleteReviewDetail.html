@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>상세 의뢰 후기</title>
+  <style>
+    /* 기본 리셋 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f7f7f7;
+    }
+
+    /* 헤더, 푸터 (include 예정) - 임시 스타일 */
+    header.header-placeholder {
+      height: 100px;
+      background-color: #eaeaea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    footer.footer-placeholder {
+      height: 100px;
+      background-color: #eaeaea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #666;
+      margin-top: 40px;
+    }
+
+    /* 메인 콘텐츠 영역 컨테이너 */
+    .content-wrapper {
+      width: 1000px;
+      max-width: 90%;
+      margin: 0 auto;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 20px;
+      min-height: 600px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    /* 상단 컨트롤 영역 */
+    .top-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    /* "상세 의뢰후기" 제목 - 그라디언트 텍스트 */
+    .detail-review-title {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #5a67d8, #4c51bf);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* 완료된 의뢰 리뷰 페이지로 이동 버튼 */
+    .review-list-link {
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(135deg, #5a67d8, #4c51bf);
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      transition: background 0.3s, transform 0.3s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    .review-list-link:hover {
+      background: linear-gradient(135deg, #4c51bf, #434190);
+      transform: translateY(-2px);
+    }
+
+    /* 의뢰 정보 섹션 */
+    .info-section {
+      margin-bottom: 20px;
+    }
+    /* 순서 변경: 의뢰 내용, 의뢰 비용, 의뢰 제목, 의뢰 날짜 */
+    .info-item {
+      border: 2px solid #c2e5d0;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #fff;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    /* 후기 섹션 */
+    .review-section {
+      display: flex;
+      border: 2px solid #c2e5d0;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      background-color: #fff;
+      align-items: flex-start;
+    }
+    .review-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 20px;
+    }
+    .profile-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+    .star-rating {
+      font-size: 1.3rem;
+      color: #ff9900;
+      margin-bottom: 10px;
+    }
+    .review-right {
+      flex: 1;
+    }
+    .review-content {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 10px;
+      min-height: 150px;
+      font-size: 0.95rem;
+      color: #333;
+      background-color: #fafafa;
+      line-height: 1.4;
+    }
+
+    /* 의뢰자 제공 서비스 (하단) */
+    .service-section {
+      border: 2px solid #c2e5d0;
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 1rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- 헤더 (include 예정) -->
+  <header class="header-placeholder">
+    헤더 영역 (include 예정)
+  </header>
+
+  <!-- 메인 콘텐츠 -->
+  <div class="content-wrapper">
+
+    <!-- 상단 컨트롤: 상세 의뢰후기 제목 및 리뷰 페이지 이동 버튼 -->
+    <div class="top-controls">
+      <h2 class="detail-review-title">상세 의뢰후기</h2>
+      <a href="#" class="review-list-link">완료된 의뢰 리뷰 페이지로</a>
+    </div>
+
+    <!-- 의뢰 정보 섹션 (순서 변경됨) -->
+    <div class="info-section">
+        <div class="info-item">의뢰 제목: 집 청소 서비스</div>
+        <div class="info-item">의뢰 날짜: 2023-01-01</div>
+        <div class="info-item">의뢰 내용: 인테리어 컨설팅 요청</div>
+      <div class="info-item">의뢰 비용: 100,000원</div>
+    </div>
+
+    <!-- 후기 섹션 -->
+    <div class="review-section">
+      <div class="review-left">
+        <img src="../resources/images/gromit.png" alt="프로필 이미지" class="profile-img">
+        <div class="star-rating">★★★★☆</div>
+      </div>
+      <div class="review-right">
+        <div class="review-content">
+          인테리어 컨설팅을 받고 정말 만족했습니다.<br>
+          색상 선정부터 가구 배치까지 꼼꼼하게 신경 써주셨어요.<br>
+          재이용 의사 100%입니다!
+        </div>
+      </div>
+    </div>
+
+    <!-- 의뢰자 제공 서비스 (하단) -->
+    <div class="service-section">
+      의뢰자 제공 서비스: <br>
+      - 도면 설계 <br>
+      - 3D 시뮬레이션 <br>
+      - 인테리어 시공 업체 연결
+    </div>
+
+  </div>
+
+  <!-- 푸터 (include 예정) -->
+  <footer class="footer-placeholder">
+    푸터 영역 (include 예정)
+  </footer>
+</body>
+</html>

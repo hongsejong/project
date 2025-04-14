@@ -1,0 +1,38 @@
+#boardTitle > input{
+    width: 1080px;
+    height: 70px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 22px;
+}
+#boardContent{
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    min-height: 99%;
+    outline: none;
+    resize: none;
+}
+#toastEditor{
+    min-height: 700px !important;
+}
+.toastui-editor-defaultUI{
+    margin-top: 10px !important;
+    width: 1120px !important;
+    resize: none !important;
+    background-color: transparent !important;
+    border: 2px solid #60E1CB !important;
+    border-radius: 10px !important;
+    box-shadow: 4px 4px 10px rgb(0, 0, 0,0.2) !important;
+    overflow-y: scroll !important;
+    outline: none !important;
+    padding: 10px !important;
+}
+.toastui-editor-defaultUI::-webkit-scrollbar {
+    display: none;
+}
+.toastui-editor-mode-switch,
+.toastui-editor-ww-container{
+    background-color: transparent !important;
+}

@@ -1,0 +1,152 @@
+/* 버튼에 있는 이미지 */
+#BtnSection img{
+    width: 25px;
+    height: 25px;
+}
+#comment{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+#inputComment{
+    width: 1120px;
+    height: 100%;
+    border: 3px solid #60E1CB;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+#inputComment > img{
+    margin: 25px;
+}
+#inputComment > div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    margin-right: 5px;
+    gap: 5px;
+    button{
+        width: 80px;
+        height: 30px;
+        border: none;
+        border-radius: 10px;
+        background-color: #6B98F2;
+        color: white;
+    }
+}
+#commentContent{
+    width: 1000px;
+    height: 60%;
+    border: none;
+    border-bottom: 2px solid black;
+    border-radius: 0;
+    outline: none;
+    background-color: transparent;
+    padding: 10px;
+    resize: none;
+}
+button{
+    cursor:pointer;
+}
+
+/* 댓글 스타일 */
+.comment-row {
+    list-style: none;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profileImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.comment-writer {
+    font-weight: bold;
+}
+
+.comment-date {
+    color: gray;
+    font-size: 12px;
+}
+
+.reply-btn {
+    background-color: #6B98F2;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 대댓글 스타일 */
+.child-comment {
+    list-style: none;
+    padding-left: 40px; /* 들여쓰기 */
+}
+
+/* 스레드형 댓글 전체 영역 */
+#commentArea {
+    width: 1120px;
+    margin: 0 auto; /* 가운데 정렬 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 댓글 리스트 스타일 */
+#commentList {
+    width: 100%; /* 부모 컨테이너에 맞춤 */
+    list-style: none;
+    padding: 0;
+}
+
+/* 댓글 아이템 기본 스타일 */
+.comment-row {
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #60E1CB;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 댓글 내용 스타일 */
+.comment-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 프로필 이미지 스타일 */
+.profileImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* 작성자 및 날짜 */
+.comment-writer {
+    font-weight: bold;
+}
+
+.comment-date {
+    color: gray;
+    font-size: 12px;
+}
+
+/* 대댓글 들여쓰기 (계층 구조 정렬) */
+.child-comment {
+    list-style: none;
+    padding-left: 40px; /* 들여쓰기 */
+    width: 100%;
+}
+
+

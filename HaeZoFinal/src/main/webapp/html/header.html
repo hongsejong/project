@@ -1,0 +1,42 @@
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> -->
+
+<link rel="stylesheet" href="../resources/css/header.css">
+
+<header>
+    <div>
+        <a href="#" id="logo">
+            <img src="../resources/images/kds/Logo.WebP" alt="">
+        </a>
+        <a href="#" id="service">서비스</a>
+        <a href="#" id="community">커뮤니티</a>
+        <div id="searchTable">
+            <input type="text" id="search">
+            <button>
+                <img src="../resources/images/search-icon.png" alt="">
+            </button>
+        </div>
+        <div class="header-top-menu">
+            <c:choose>
+                <c:when test="${empty loginMember}">
+                    <a href="#" class="button" id="login">로그인</a>
+                    <a href="/member/login" class="button" id="signUp">회원가입</a>
+                </c:when>
+                <c:otherwise>
+                    <!-- 로그인 O -->
+                    <!-- <label for="headerMenuToggle" class="button" id="nickName" >
+                        닉네임 <i class="fa-solid fa-caret-down"></i>
+                    </label>
+    
+                    <input type="checkbox" id="headerMenuToggle">
+                    
+                    <div class="header-menu">
+                        <a href="/myPage/info" class="button" >마이페이지</a>
+                        <a href="/member/logout"class="button" >로그아웃</a>
+                    </div> -->
+    
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </div>
+</header>

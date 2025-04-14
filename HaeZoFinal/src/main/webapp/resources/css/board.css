@@ -1,0 +1,380 @@
+/* 화면 사이즈 범위 */
+body{
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
+    background-color: #F8F8F8;
+    box-sizing: border-box;
+}
+
+
+/* 게시판 */
+body > div > h1{
+    width: 1920px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+/* 게시판 종류 */
+#boardMenu{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    a, p{
+        text-decoration: none;
+        color: black;
+        font-size : 25px;
+        font-weight: bold;
+        padding: 10px;
+        text-shadow: 0px 4px 4px rgb(0, 0, 0, 0.25);
+        
+    }
+}
+#boardMenu > a:hover {
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+}
+
+#boardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1200px;
+    margin: 20px auto 0 auto;
+    padding: 10px 0;
+}
+#boardMenu a {
+    text-decoration: none;
+    color: black;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px;
+    margin-right: 10px;
+}
+#boardMenu a:hover {
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+}
+#writeButton a {
+    text-decoration: none;
+}
+
+/* 페이지네이션, 검색창 섹션*/
+#page-search{
+    width: 1200px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+
+    
+}
+
+/* 페이지네이션 영역 */
+.pagination-area{
+    display: flex;
+    align-items: center;
+}
+.pagination{
+    display: flex;
+    align-items: center;
+    margin-left: 0;
+
+}
+.pagination > li{
+    list-style: none;
+}
+.pagination a{
+    text-decoration: none;
+    color: #0F62FE;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+}
+.pagination a {
+    display: inline-block;
+    width: 40px;           /* 고정 너비 설정 (필요시 값 조절) */
+    text-align: center;    /* 텍스트 중앙 정렬 */
+    box-sizing: border-box;/* 패딩과 테두리를 너비에 포함 */
+    padding: 10px 0;       /* 위아래 패딩만 주고 좌우는 고정된 너비 내에 들어가게 함 */
+}
+
+.pagination a:hover{
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+}
+
+.pagination li a.current {
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+/* 글쓰기 */
+.board-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 0;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 글쓰기 */
+#insertBtn{
+    width: 80px;
+    height: 50px;
+    border: none;
+    font-weight: bold;
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* 검색 영역 */
+#boardSearch{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#searchKey{
+    width: 70px;
+    height: 40px;
+    background-color: #6B98F2;
+    border: none;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 10px;
+    color: white;
+    text-align-last: center; 
+    appearance: none;
+    text-align: center;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px black;
+}
+
+#searchKey:checked{
+    outline: none;
+}
+
+
+
+#boardSearch > input {
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size : 15px;
+    border-right: 2px solid #91F2E9;
+    border-bottom: 2px solid #91F2E9;
+    background-color: white;
+}
+#boardSearch > input:focus{
+    outline : none;
+}
+
+#boardSearchBtn{
+    width: 60px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 0;
+}
+#boardSearchBtn:hover{
+    background-color: #91F2E9;
+    color: #6B98F2;
+}
+
+/* ----------------------------------------------------------------- */
+/* 전체 목록 컨테이너 */
+#boardList {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 각 게시글 아이템(한 줄) */
+.board-item {
+    display: grid;
+    grid-template-columns: 160px 1fr 200px 120px; 
+    /* 
+       grid-template-columns로 4개 칸을 만듦.
+       - 160px: 썸네일(가로 160px 고정)
+       - 1fr: 제목 부분(남는 공간 활용)
+       - 200px: 작성자+날짜 부분
+       - 120px: 조회수/좋아요
+       상황과 디자인에 맞춰 px 값을 변경해보세요.
+    */
+    align-items: center;
+    border-top: 3px solid #60E1CB;
+    padding: 10px;
+    background-color: transparent;
+}
+
+/* 썸네일 영역 */
+.thumbnail img {
+    width: 100px;
+    height: 50px;
+    object-fit: contain; /* 이미지가 영역에 맞춰 잘리는 방식 */
+    border-radius: 10px;    
+    cursor: pointer;
+}
+.thumbnail img:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+
+/* 게시글 제목 영역 */
+.title-wrap {
+    padding: 0 10px;  /* 제목 영역 좌우 여백 */
+    margin-left: 20px;
+}
+/* 게시글 제목 */
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0; /* 기본 p 태그 마진 제거 */
+    color: black;
+    text-decoration: none;
+}
+.title:hover{
+    text-decoration: underline;
+    text-decoration-color: #6B98F2;
+}
+/* 댓글 수 */
+.comment-count {
+    color: #6B98F2;
+}
+
+/* 작성자, 프로필, 작성일 */
+.writer-info {
+    display: flex;
+    flex-direction: column; 
+    gap: 5px; 
+}
+.writer-upper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: black;
+}
+.profile-image {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.writer-name {
+    font-weight: bold;
+}
+
+/* 조회수, 좋아요 수 */
+.etc-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+.etc-upper,
+.etc-lower {
+    font-size: 14px;
+    color: #333;
+}
+
+/* 모달 기본 (숨김 상태) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+}
+
+/* 모달 내부 이미지 */
+.modal-content {
+    display: block;
+    margin: 5% auto;
+    max-width: 80%;
+    border-radius: 8px;
+    background-color: white;
+    
+}
+
+/* 닫기 버튼(×) */
+.modal-close {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    color: #fff;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.modal-close:hover {
+    color: #ccc;
+}
+
+footer{
+    bottom: 0;
+    margin-top: 100px;
+    width: 1920px;
+    height: 300px;
+    background-image: url(../images/footer.png);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+#footer-menu{
+    width: 1400px;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding: 30px;
+    border-bottom: 3px solid rgb(255, 255, 255, 0.6);
+}
+#footer-menu-logo p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    background: transparent;
+    font-size: 18px;
+}
+#footer-menu-list a{
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+

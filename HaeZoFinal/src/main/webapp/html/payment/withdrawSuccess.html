@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>포인트 출금신청 성공 화면</title>
+</head>
+<section class="withdrawResult-body">
+  <div class="box_section">
+    <img src="https://static.toss.im/illusts/check-blue-spot-ending-frame.png" class="check-icon"/>
+    <h2 class="infoTitle">출금신청이 완료되었습니다.</h2>
+    <div class="info-grid">
+      <div class="info-row">
+        <span class="label">출금예정 금액</span>
+        <span class="value" id="withdrawAmount"></span>
+      </div>
+      <div class="info-row">
+        <span class="label">보유 포인트 잔액</span>
+        <span class="value" id="afterTotalAmount"></span>
+      </div>
+      <div class="info-row">
+        <span class="label">💲 출금 신청 후 5 영업일 이내로 계좌 이체 예정입니다. 💲</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const withdrawAmount = "${amount}";
+    const afterTotalAmount = "${afterTotalAmount}";
+
+    // 숫자 포맷 변환 함수
+    function formatCurrency(number) {
+      return new Intl.NumberFormat('ko-KR', {
+        style: 'currency',
+        currency: 'KRW',
+        minimumFractionDigits: 0,
+      }).format(number).replace("₩", "") + "원";
+    }
+
+    // 값을 HTML에 반영
+    document.getElementById("withdrawAmount").textContent = formatCurrency(withdrawAmount);
+    document.getElementById("afterTotalAmount").textContent = formatCurrency(afterTotalAmount);
+  </script>
+</section>
+</html>

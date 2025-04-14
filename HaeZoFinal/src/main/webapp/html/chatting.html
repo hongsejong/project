@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>채팅방</title>
+    <style>
+        /* 기본 리셋 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f5f7fa;  /* 전체 배경색 */
+        }
+
+        /* 로고 영역 */
+        .logo-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .logo {
+            width: 150px;  /* 로고 크기 조절 */
+            height: auto;
+        }
+
+        main {
+            /* 메인 컨테이너를 둥글게 */
+            position: relative; /* X버튼 절대 배치용 */
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 20px;  /* 둥근 모서리 */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 채팅창 닫기 버튼 */
+        .close-chat {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-chat:hover {
+            color: #555;
+        }
+
+        /* 채팅 영역 전체 */
+        .chatting-area {
+            display: flex;
+            width: 100%;
+            height: 650px;
+            gap: 20px;
+        }
+
+        /* 채팅방 목록 */
+        .chatting-list {
+            width: 30%;
+            list-style: none;
+            border-radius: 20px; /* 둥글게 */
+            background-color: #fafafa;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow: visible; /* 자식 요소가 넘칠 수 있도록 */
+        }
+        .chatting-item {
+            display: flex;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .chatting-item:hover {
+            background-color: #f0f0f0;
+        }
+        .chatting-item.select {
+            background-color: #e7e9ff;
+            position: relative; 
+            width: 103%; /* 기존보다 넓게 설정 */
+            border-radius: 12px;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+            z-index: 10; /* 다른 요소보다 위로 배치 */
+
+            
+        }
+        .item-header {
+            width: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .list-profile {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .item-body {
+            flex: 1;
+            margin-left: 10px;
+        }
+        .item-body > p {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .target-name {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .recent-send-time {
+            font-size: 0.8rem;
+            color: #999;
+        }
+        .item-body > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .recent-message {
+            font-size: 0.9rem;
+            color: #666;
+            max-width: 170px;
+            /* 말줄임 처리 */
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            word-break: break-all;
+            line-height: 1.2;
+        }
+        .not-read-count {
+            min-width: 20px;
+            height: 20px;
+            padding: 0 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            background-color: red;
+            color: white;
+            font-size: 12px;
+            margin-left: 8px;
+            font-weight: bold;
+        }
+
+        /* 채팅 내용 영역 */
+        .chatting-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border-radius: 20px; /* 둥글게 */
+            background-color: #fafafa;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* 상단: 대화 상대 표시 영역 */
+        .chatting-header {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            border-radius: 20px 20px 0 0; /* 상단만 둥글게 */
+            background-color: #fff;
+        }
+        .header-profile {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        .header-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* 채팅 메시지 목록 */
+        .display-chatting {
+            flex: 1;
+            list-style: none;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        .display-chatting > li {
+            margin: 10px 0;
+        }
+
+        /* 타겟(상대) 채팅 */
+        .target-chat {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .target-chat > img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* 공통 채팅 말풍선 */
+        .chat {
+            display: inline-block;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            background-color: #eee;
+            word-break: break-word;
+            white-space: pre-wrap;
+            max-width: 70%;
+        }
+
+        /* 내 채팅 (오른쪽 정렬) */
+        .my-chat {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            margin: 10px 0;
+        }
+        .my-chat .chat {
+            background-color: #cbe2ff;
+        }
+
+        /* 채팅 시간 표시 */
+        .chatDate {
+            font-size: 0.75rem;
+            color: #888;
+            margin: 0 8px;
+        }
+
+        /* 채팅 입력 영역 */
+        .input-area {
+            display: flex;
+            padding: 10px;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+            border-radius: 0 0 20px 20px; /* 하단 모서리 둥글게 */
+        }
+        #inputChatting {
+            flex: 1;
+            resize: none;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 1rem;
+            outline: none;
+            margin-right: 10px;
+        }
+        #send {
+            width: 120px;
+            border: none;
+            border-radius: 6px;
+            background-color: #455BA7;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #send:hover {
+            background-color: #2f4680;
+        }
+
+        /* 퇴장 메시지 */
+        .exit {
+            text-align: center;
+            margin: 10px 0;
+        }
+        .exit > p {
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        .chat-exit {
+            width: 100%;
+            text-align: center;
+            background-color: black;
+            color: white;
+        }
+
+        /* 임시로 채팅창 숨김 기능 (JS 없이 데모) */
+        /* 실제로는 JavaScript로 .hide 혹은 display: none; 토글 */
+        .hide {
+            display: none !important;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- 로고 영역 -->
+<div class="logo-area">
+    <img src="../resources/images/Logo.WebP" alt="로고" class="logo">
+</div>
+
+<main id="chatContainer">
+    <!-- 채팅창 닫기 버튼 -->
+    <button class="close-chat" onclick="document.getElementById('chatContainer').classList.add('hide');">&times;</button>
+
+    <!-- 채팅 영역 -->
+    <div class="chatting-area">
+
+        <!-- 채팅방 목록 -->
+        <ul class="chatting-list">
+            <li class="chatting-item select" chat-no="1" target-no="101">
+                <div class="item-header">
+                    <img class="list-profile" src="../resources/images/gromit.png" alt="유저이미지">
+                </div>
+                <div class="item-body">
+                    <p>
+                        <span class="target-name">유저일</span>
+                        <span class="recent-send-time">PM 04:22</span>
+                    </p>
+                    <div>
+                        <p class="recent-message">마지막 메시지 내용이 표시됩니다.</p>
+                        <p class="not-read-count">2</p>
+                    </div>
+                </div>
+            </li>
+            <li class="chatting-item" chat-no="2" target-no="102">
+                <div class="item-header">
+                    <img class="list-profile" src="../resources/images/gromit.png" alt="유저이미지">
+                </div>
+                <div class="item-body">
+                    <p>
+                        <span class="target-name">유저이</span>
+                        <span class="recent-send-time">PM 02:10</span>
+                    </p>
+                    <div>
+                        <p class="recent-message">안 읽은 메시지가 없으면 숫자는 표시되지 않습니다.</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <!-- 실제 채팅창 -->
+        <div class="chatting-content">
+            <!-- 대화 상대 표시 (DB에서 받아올 예정) -->
+            <div class="chatting-header">
+                <img class="header-profile" src="../resources/images/gromit.png" alt="상대이미지">
+                <span class="header-name">유저일</span>
+            </div>
+
+            <ul class="display-chatting">
+                <li class="my-chat">
+                    <span class="chatDate">12:11</span>
+                    <p class="chat">오늘 수업 어땠어?</p>
+                </li>
+                <li class="target-chat">
+                    <img src="../resources/images/gromit.png" alt="상대프로필">
+                    <div>
+                        <b>유저일</b><br>
+                        <p class="chat">채팅 배웠는데 너무 재밌어!<br>혜선쌤 강의는 최고야!</p>
+                        <span class="chatDate">14:05</span>
+                    </div>
+                </li>
+                <!-- 퇴장 메시지 예시 -->
+                <li class="exit">
+                    <p>상대방이 채팅방을 나갔습니다.</p>
+                </li>
+            </ul>
+
+            <div class="input-area">
+                <textarea id="inputChatting" rows="3" placeholder="메시지를 입력하세요..."></textarea>
+                <button id="send">보내기</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의내역 목록</title>
+    <link rel="stylesheet" href="../../resources/css/hsj/InquiryList.css">
+</head>
+<body>
+    <div id="main-container">
+        <div id="header">
+            <p id="mytext">내 문의내역</p>
+            <div id="search-area">
+                <input type="text" id="search-box" placeholder="검색어 입력">
+                <button id="search-btn">검색</button>
+            </div>
+        </div>
+
+        <div id="check-area">
+            <select>
+                <option value="">15개씩 보기</option>
+                <option value="">50개씩 보기</option>
+                <option value="">100개씩 보기</option>
+            </select>
+            <br>
+            답변 전만 보기
+            <input type="checkbox">
+        </div>
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>문의번호</th>
+                    <th>문의제목</th>
+                    <th>처리결과</th>
+                    <th>관리</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 하나 시작 -->
+                <tr class="tr">
+                    <td>1</td>
+                    <td><a href="">문의제목 테스트</a></td>
+                    <td class="status-pending">답변 전</td>
+                    <td>
+                        <button class="edit-btn">수정</button>
+                        <button class="delete-btn">삭제</button>
+                    </td>
+                </tr>
+                <!-- 하나 끝 -->
+                <!-- 하나 시작 -->
+                <tr class="tr">
+                    <td>2</td>
+                    <td><a href="">문의제목 테스트</a></td>
+                    <td class="status-pending">답변 전</td>
+                    <td>
+                        <button class="edit-btn">수정</button>
+                        <button class="delete-btn">삭제</button>
+                    </td>
+                </tr>
+                <!-- 하나 끝 -->
+                <!-- 하나 시작 -->
+                <tr class="tr">
+                    <td>3</td>
+                    <td><a href="">문의제목 테스트</a></td>
+                    <td class="status-complete">답변 완료</td>
+                    <td>
+                        <button class="edit-btn">수정</button>
+                        <button class="delete-btn">삭제</button>
+                    </td>
+                </tr>
+                <!-- 하나 끝 -->
+            </tbody>
+        </table>
+
+        <div id="page">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>...</button>
+        </div>
+
+        <div id="add-post">
+            <button id="add-btn">새 문의 등록</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="paymentMapper">
+	
+	<!-- 포인트 충전 결제 -->
+	<insert id="insertPayment">
+		INSERT INTO PAYMENT (PAYMENT_NO, MEMBER_NO, PAYMENT_TYPE, PAYMENT_AMOUNT, PAYMENT_DATE, PAYMENT_DESC, ORDER_ID, PAYMENT_KEY)
+		VALUES(NULL, #{memberNo}, #{paymentType}, #{amount}, CURRENT_DATE, #{paymentDesc}, #{orderId}, #{paymentKey})
+	</insert>
+	
+	<!-- 포인트 출금 정보 삽입 -->
+	<insert id="insertBalance">
+		INSERT INTO PAYMENT (PAYMENT_NO, MEMBER_NO, PAYMENT_TYPE, PAYMENT_AMOUNT, PAYMENT_DATE, PAYMENT_DESC, ORDER_ID, PAYMENT_KEY)
+		VALUES(NULL, ${memberNo}, 'withdraw', ${amount}, CURRENT_DATE, '포인트 출금 신청', #{orderId}, #{paymentKey})
+	</insert>
+	
+	<!-- 포인트 조회 최신화 -->
+	<select id="remainingAmount" resultType="_int">
+		SELECT NVL(
+		    ( 
+		        (SELECT SUM(PAYMENT_AMOUNT) 
+		         FROM PAYMENT 
+		         WHERE PAYMENT_TYPE IN ('charge', 'receive')  
+		           AND MEMBER_NO = #{memberNo}) 
+		      -
+		        NVL((SELECT SUM(PAYMENT_AMOUNT) 
+		         FROM PAYMENT 
+		         WHERE PAYMENT_TYPE IN ('withdraw', 'send')
+		           AND MEMBER_NO = #{memberNo}),0)
+		    ), 0
+		) AS amount
+		FROM DUAL
+  	</select>
+  	
+  	<!-- paymentKey 조회 -->
+  	<select id="selectPaymentKeys" resultType="string">
+  		SELECT PAYMENT_KEY FROM PAYMENT WHERE MEMBER_NO = #{memberNo} AND PAYMENT_TYPE = 'charge' ORDER BY PAYMENT_DATE DESC
+  	</select>
+	
+</mapper>

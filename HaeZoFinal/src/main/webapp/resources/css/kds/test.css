@@ -1,0 +1,138 @@
+/* 기본 스타일 */
+html, body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: white;
+}
+
+/* 전체 컨테이너 */
+.container {
+    width: 1320px;
+    height: 2713px;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+}
+
+/* 검색바 */
+.search-bar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 632px;
+    position: absolute;
+    left: 274px;
+    top: 36px;
+    gap: 8px;
+    padding: 1px 17px;
+    border-radius: 20px;
+    background: #fff;
+    border: 1px solid #303441;
+}
+
+.search-input {
+    flex-grow: 1;
+    width: 554px;
+    height: 42px;
+}
+
+.search-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 36px;
+    padding: 6px;
+    border-radius: 8px;
+}
+
+/* 로그인, 회원가입 버튼 */
+.login-button, .signup-button {
+    width: 112px;
+    height: 39px;
+    position: absolute;
+    border-radius: 10px;
+    background: #6b98f2;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: #f2f2f2;
+    border: none;
+    cursor: pointer;
+}
+
+.login-button {
+    left: 1000px;
+    top: 38px;
+}
+
+.signup-button {
+    left: 1139px;
+    top: 39px;
+}
+
+/* 로고 */
+.logo {
+    width: 47px;
+    height: 47px;
+    position: absolute;
+    left: 66.5px;
+    top: 35.5px;
+    object-fit: contain;
+}
+
+/* 화살표 */
+.down-arrow {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 1179.5px;
+    top: 979.5px;
+    object-fit: contain;
+}
+
+.up-arrow {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 1179.5px;
+    top: 842.5px;
+    object-fit: contain;
+}
+
+/* 텍스트 스타일 */
+.title, .subtitle, .breadcrumb {
+    font-size: 24px;
+    text-align: center;
+    color: #000;
+}
+
+.title {
+    width: 332px;
+    height: 45px;
+    position: absolute;
+    left: -66px;
+    top: 265px;
+}
+
+.subtitle {
+    width: 266px;
+    height: 45px;
+    position: absolute;
+    left: -42px;
+    top: 353px;
+}
+
+.breadcrumb {
+    width: 332px;
+    height: 45px;
+    position: absolute;
+    left: -49px;
+    top: 201px;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>로그인 페이지</title>
+  <link rel="stylesheet" href="login.css" />
+  <script src="https://kit.fontawesome.com/9d18722475.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <main>
+    <!-- 로고 영역 -->
+    <section class="logo-area">
+      <a href="/">
+        <img src="../resources/images/Logo.WebP" alt="로고" />
+      </a>
+    </section>
+
+    <!-- 로그인 폼 -->
+    <form action="/member/login" method="post" id="loginFrm">
+      <section class="input-box">
+        <input
+          type="text"
+          name="memberEmail"
+          placeholder="Email"
+          value=""
+        />
+      </section>
+
+      <section class="input-box">
+        <input
+          type="password"
+          name="memberPw"
+          placeholder="Password"
+        />
+      </section>
+
+      <button class="login-btn">Login</button>
+
+      <div class="saveId-area">
+        <input type="checkbox" name="saveId" id="saveId" />
+        <label for="saveId"><i class="fas fa-check"></i>아이디 저장</label>
+      </div>
+
+      <p class="text-area">
+        <a href="#">회원가입</a> | <a href="#">ID/PW 찾기</a>
+      </p>
+    </form>
+
+    <!-- SNS 로그인 버튼 영역 -->
+    <div class="sns-buttons">
+      <button class="kakao-btn">
+        <img src="../resources/images/kakao.jpg" alt="카카오 로고" class="btn-icon" />
+        카카오로 시작하기
+      </button>
+      <button class="naver-btn">
+        <img src="../resources/images/naver.png" alt="네이버 로고" class="btn-icon" />
+        네이버로 시작하기
+      </button>
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+
+/* 네브 */
+nav, main{
+    width: 1320px;
+    margin: auto;
+}
+
+.navP{
+    padding-top: 40px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    margin-top: 50px;
+    border-top: 1px solid #60E1CB;
+}
+
+.navP>a{
+    text-decoration: none;
+    color:black;
+}
+
+.navP2{
+    padding: 0 0 30px 0;
+    margin: 0;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+nav>h3 {
+    margin: 0 0 40px 150px;
+}
+
+nav>ul{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.categoryLi{
+    list-style: none;
+    margin: 5px;
+    font-weight: bold;
+    border-radius: 10px;
+    height: 70px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#categoryImgArea{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 120px;
+    margin-top: 50px;
+}
+/* 메인 메뉴(카테고리) 이미지 */
+#categoryImgArea img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+    border: none;
+    object-fit: cover;
+}
+#categoryImgArea a{
+    text-decoration: none;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#categoryImgArea span{
+    margin: 10px 0;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.category-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #60E1CB;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 10px 0;
+    font-size: 32px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    }
+
+.category-icon:hover {
+    transform: scale(1.1);
+}
+
+nav>ul>li>img{
+    width: 60px;
+    height: 60px;
+    margin-left: 5px;
+}
+
+nav>ul>li>a{
+    text-decoration: none;
+    font-size: 1.1em;
+    color: black;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* *{box-sizing: border-box;}
+
+
+.card{
+    transition: all 0.5s ease;
+    margin-bottom: 30px;
+    border-radius: 12px;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+    transition: all 0.5s ease;
+}
+
+.item-img{
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+}
+
+
+.btn{
+    cursor: pointer;
+    color: white;
+    background-color: #2571BC;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn:hover{
+    color: #2571BC;
+    background-color: white;
+    border: 1px solid #2571BC;
+} */

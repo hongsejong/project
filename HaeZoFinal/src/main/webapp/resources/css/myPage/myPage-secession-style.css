@@ -1,0 +1,277 @@
+:root {
+    --primary-color: #5A67D8;
+    --secondary-color: #C2E5D0;
+    --bg-color: #F7F7F7;
+    --light-bg: #F2F2F2;
+    --text-color: #333;
+    --border-color: #DDD;
+    --accent-color: #AAD7BF;
+    --transition-speed: 0.3s;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .container {
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  /* 헤더 설정 */
+  .header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    margin-bottom: 25px;
+  }
+  .header-left {
+    margin-left: 10px;
+    display: flex;
+    gap: 15px;
+  }
+  .header-left .box {
+    background-color: var(--secondary-color);
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    transition: background-color var(--transition-speed);
+  }
+  .header-left .box:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+  }
+  .header-right {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .header-right img {
+    height: 40px;
+    width: auto;
+  }
+  /* 회원탈퇴 유의사항 섹션 */
+  .withdrawal-notice {
+    background-color: #eefaf3;
+    padding: 15px;
+    margin-bottom: 25px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 15px;
+    color: var(--text-color);
+    font-weight: 500;
+  }
+  .withdrawal-notice h3 {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .withdrawal-notice ul {
+    list-style: disc;
+    margin-left: 20px;
+  }
+  .withdrawal-notice li {
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+  }
+  .main {
+    display: block;
+  }
+  .content-area {
+    width: 100%;
+  }
+  .box-title {
+    background-color: var(--secondary-color);
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 5px;
+    color: var(--text-color);
+  }
+  .box-content {
+    background-color: var(--light-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    line-height: 1.5;
+  }
+  .radio-item {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  .radio-item input[type="radio"] {
+    margin-right: 10px;
+  }
+  #otherReasonContainer textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    resize: none;
+  }
+  /* 입력 관련 섹션 */
+  .email-verification {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .email-box {
+    flex: 1;
+    background-color: var(--light-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 20px;
+    font-weight: 500;
+    color: var(--text-color);
+  }
+  .verify-btn {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 15px;
+    padding: 10px 15px;
+    font-weight: 500;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    white-space: nowrap;
+  }
+  .verify-btn:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .bottom-btns {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .btn-box {
+    flex: 1;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 15px;
+    padding: 15px 0;
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+  }
+  .btn-box:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+    transform: translateY(-3px);
+  }
+  input[type="email"],
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    color: var(--text-color);
+  }
+  input[type="email"]::placeholder,
+  input[type="text"]::placeholder,
+  input[type="password"]::placeholder {
+    color: var(--text-color);
+    opacity: 0.7;
+  }
+
+  /* 모달 관련 스타일 추가 (화면 깨짐 없이 기존 레이아웃과 별도 처리) */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    display: none; /* 기본 숨김 */
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  .modal-container {
+    position: relative;
+    width: 500px;
+    background-color: #52ceb8;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    padding: 40px;
+    text-align: center;
+    color: #333;
+    font-family: sans-serif;
+  }
+  .modal-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="%23ffffff33" stroke-width="2" d="M0 70 Q100 140 220 50 T400 60" /><path fill="none" stroke="%23ffffff33" stroke-width="2" d="M0 160 Q100 220 220 130 T400 140" /><path fill="none" stroke="%23ffffff33" stroke-width="2" d="M0 250 Q100 320 220 230 T400 240" /></svg>') no-repeat center / cover;
+    opacity: 0.3;
+    z-index: 0;
+  }
+  .modal-content {
+    position: relative;
+    z-index: 1;
+  }
+  .modal-content h2 {
+    margin-bottom: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000;
+  }
+  .modal-content p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #222;
+  }
+  .notice-list {
+    text-align: left;
+    margin-bottom: 25px;
+    color: #222;
+  }
+  .notice-list li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  .modal-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .modal-btn-group button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 14px 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  .modal-btn-group button:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+  }

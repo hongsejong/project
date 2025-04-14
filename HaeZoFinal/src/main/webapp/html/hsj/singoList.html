@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신고 목록</title>
+    <link rel="stylesheet" href="../../resources/css/hsj/singoList.css">
+</head>
+<body>
+    <div id="main-container">
+        <div id="header">
+            <p id="mytext">신고 관리</p>
+            <div id="search-area">
+                <input type="text" id="search-box" placeholder="검색어 입력">
+                <button id="search-btn">검색</button>
+            </div>
+        </div>
+
+        <div id="check-area">
+            <select>
+                <option value="">15개씩 보기</option>
+                <option value="">50개씩 보기</option>
+                <option value="">100개씩 보기</option>
+            </select>
+            <br>
+            처리 전만 보기
+            <input type="checkbox">
+
+        </div>
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>선택</th>
+                    <th>글 번호</th>
+                    <th>작성자</th>
+                    <th>신고자</th>
+                    <th>신고유형</th>
+                    <th>제목</th>
+                    <th>처리결과</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 하나 시작 -->
+                <tr class="tr">
+                    <td><input type="checkbox"></td>
+                    <td>1</td>
+                    <td>유저일</td>
+                    <td>홍길동</td>
+                    <td>기타</td>
+                    <td><a href="">신고제목 테스트</a></td>
+                    <td class="status-pending">처리 전</td>
+
+                </tr>
+                <!-- 하나 끝 -->
+                <!-- 하나 시작 -->
+                <tr class="tr">
+                    <td><input type="checkbox"></td>
+                    <td>1</td>
+                    <td>유저일</td>
+                    <td>홍길동</td>
+                    <td>기타</td>
+                    <td><a href="">신고제목 테스트</a></td>
+                    <td class="status-cancel">글 삭제</td>
+
+                </tr>
+                <!-- 하나 끝 -->
+                 <!-- 하나 시작 -->
+                <tr class="tr">
+                    <td><input type="checkbox"></td>
+                    <td>1</td>
+                    <td>유저일</td>
+                    <td>홍길동</td>
+                    <td>기타</td>
+                    <td><a href="">신고제목 테스트</a></td>
+                    <td class="status-complete">신고 취소</td>
+
+                </tr>
+                <!-- 하나 끝 -->
+                 <!-- 하나 시작 -->
+                <tr class="tr">
+                    <td><input type="checkbox"></td>
+                    <td>1</td>
+                    <td>유저일</td>
+                    <td>홍길동</td>
+                    <td>기타</td>
+                    <td><a href="">신고제목 테스트</a></td>
+                    <td class="status-pending">처리 전</td>
+
+                </tr>
+                <!-- 하나 끝 -->
+
+              
+            </tbody>
+        </table>
+        <div id="btn2-area">
+            <button>신고 무시</button>
+            <button>글 삭제</button>
+        </div>
+
+        <div id="page">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>...</button>
+        </div>
+
+        <div id="add-post">
+            <button id="add-btn">새 문의 등록</button>
+        </div>
+    </div>
+</body>
+</html>

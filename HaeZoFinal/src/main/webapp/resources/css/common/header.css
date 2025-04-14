@@ -1,0 +1,747 @@
+*{
+    box-sizing: border-box;
+    /* border: 1px solid black; */
+}
+/* 브라우저의 기본 X축 스크롤바만 숨기기 */
+/* ::-webkit-scrollbar:horizontal {
+    height: 0;
+} */
+/* 전체 페이지에서 X축 스크롤바 숨기기 */
+/* body {
+    overflow-x: hidden;
+} */
+header{
+    /* width: 1920px; */
+    height: 50px;
+    margin-top: 20px;
+}
+header>div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#searchTable{
+    width: 550px;
+    height: 50px;
+    margin: 0 0 0 10px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    /* box-shadow: 4px 4px 4px rgb(96, 225, 203, 0.3); */
+    border: 3px solid #60E1CB;
+}
+#search{
+    height: 100%;
+    width: 100%;
+    border: none;
+    /* border-radius: 100px; */
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    background-color: transparent;
+    outline: none;
+    padding-left: 20px;
+}
+#searchTable > button{
+    width: 70px;
+    height: 42px;
+    border-radius: 100px;
+    margin-right: 4px;
+    background-color: #6B98F2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    
+    img{
+        width: 25px;
+        height: 25px;
+        background-color: transparent;
+    }
+}
+/* 자동완성 검색 결과 스타일 */
+#searchResult {
+    position: absolute;
+    top: 55px;
+    width: 560px;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: white;
+    border: 3px solid transparent;
+    background: linear-gradient(white, white) padding-box, 
+                linear-gradient(to bottom right, #60E1CB, #6B98F2) border-box;
+    border-radius: 8px;
+    z-index: 999;
+    padding: 0;
+    margin: 0;
+}
+/* 스크롤바 전체 영역 */
+#searchResult::-webkit-scrollbar {
+    width: 6px; /* 얇은 바만 표시 */
+}
+
+/* 스크롤바 막대기 */
+#searchResult::-webkit-scrollbar-thumb {
+    background-color: #60E1CB; /* 바 색상 */
+    border-radius: 3px;
+}
+
+/* 스크롤바 배경 */
+#searchResult::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#searchResult li {
+    list-style: none;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+#searchResult li:hover {
+    background-color: #f0f0f0;
+}
+
+#searchResult.close {
+    display: none;
+}
+
+header a{
+    text-decoration: none;
+    color: black;
+    margin: 0 10px 0 10px;
+}
+#service{
+    font-size: 22px;
+    font-weight: bold;
+}
+#community{
+    font-size: 22px;
+    font-weight: bold;
+    /* margin-right: 30px; */
+}
+#customer{
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 30px;
+}
+
+#login{
+    margin-left: 40px;
+    background-color: #6B98F2;
+    padding: 5px 20px;
+    border-radius: 10px;
+    color: white;
+}
+.button{
+    background-color: #6B98F2;
+    padding: 5px 20px;
+    border-radius: 10px;
+    color: white;
+    width: auto;
+}
+
+#nickName{
+    width: 165px;
+    height: 40px;
+    margin-left: 130px;
+    position: relative;
+}
+
+#nickName > img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 10px;
+    padding: 0;
+    background-color: transparent;
+}
+
+.header-top-menu *{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* 헤더 메뉴 체크 박스 */
+#headerMenuToggle{
+    display: none;
+}
+
+/* 오른쪽 상단 닉네임 부분 */
+label[for='headerMenuToggle']{cursor: pointer;}
+label[for='headerMenuToggle']:hover{text-decoration: underline;}
+
+/* 체크박스 다음 형제 요소 div */
+#headerMenuToggle + div{ display: none;}
+
+/* 체크된 #headerMenuToggle의 다음 형제 요소 div */
+#headerMenuToggle:checked + div{ display: block;}
+
+/* 닉네임 클릭 시 보이는 메뉴 */
+.header-menu{
+    position: absolute;
+    right: 0;
+    background-color: rgba(128, 128, 128, 0.3);
+    margin: 5px 0 5px 5px;
+    border-radius: 10px;
+    min-width: 150px;
+}
+
+/* 메뉴 숨김 상태 */
+#headerMenuToggle + div {
+    display: block;
+    max-height: 0; /* 처음에는 보이지 않게 */
+    overflow: hidden; /* 내용이 넘치지 않게 */
+    transition: max-height 0.5s ease-in-out; /* 애니메이션 효과 */
+}
+
+/* 메뉴 펼쳐졌을 때 */
+#headerMenuToggle:checked + div {
+    max-height: 300px; /* 원하는 최대 높이로 설정 */
+}
+
+#amount{
+    color: black;
+    background-color: white;
+    /* border: 3px solid #60E1CB; */
+    border: 5px solid transparent;
+    background: linear-gradient(white, white) padding-box, 
+                linear-gradient(to bottom right, #60E1CB, #6B98F2) border-box;
+    cursor: default !important;
+    pointer-events: none !important;
+}
+#myPageInfo,
+#charge,
+#Withdraw{
+    background-color: rgb(107, 152, 242, 0.7);
+}
+#myPageInfo:hover,
+#charge:hover,
+#withdraw:hover{
+    background-color: #6B98F2;
+}
+#logout{
+    background-color: rgb(242, 107, 107, 0.7);
+}
+#logout:hover{
+    background-color: #F26B6B;
+}
+
+.header-menu > a{
+    display: flex;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3px;
+}
+
+/* nav 버튼 */
+/* #nav{
+    position: fixed;
+    bottom: 20px;
+    right: 200px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    button{
+        width: 50px;
+        height: 50px;
+        font-size: 30px;
+        border: none;
+        border-radius: 50px;
+        background-color: rgb(236, 219, 67);
+        color: rgb(88, 134, 18);
+        cursor: pointer;
+    }
+} */
+
+/* nav 버튼 */
+#nav {
+    position: fixed;
+    bottom: 20px;
+    right: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 1000;
+  }
+  
+  #nav button {
+    width: 56px;
+    height: 56px;
+    border: none;
+    border-radius: 50%;
+    font-size: 26px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #60E1CB, #43C6AC);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  
+  #nav button:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(96, 225, 203, 0.45);
+  }
+  
+
+/* 알림 */
+header>section:nth-child(3) {
+    position: relative;
+}
+.notification-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+.notification-btn {
+    font-size: 20px;
+    position: absolute;
+    top: 35px;
+    left: 85px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+/* 읽지 않은 알림이 존재하는 경우 */
+.notification-btn.fa-solid {
+    color: yellow;
+    text-shadow: 1px 1px 3px gray, 2px 2px 5px black;
+}
+.notification-count-area {
+    position: absolute;
+    bottom: -6px;
+    right: -10px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    font-size: 9px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: white;
+}
+.notification-list {
+    position: absolute;
+    top: 55px;
+    right: -100px;
+    width: 380px;
+    height: 400px;
+    padding: 10px;
+    list-style: none;
+    z-index: 2000;
+    background: #f0f3fa;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px #eee, 0 4px 8px 0 rgba(0, 0, 0, .3);
+    display: none;
+    /* 처음에 알림 창이 보이지 않게 함 */
+}
+/* 알림 창 보이게 하기 */
+.notification-show {
+    display: block;
+}
+.notification-item {
+    background-color: white;
+    margin: 15px 0;
+    border-radius: 5px;
+    width: 100%;
+    height: 70px;
+    font-size: 15px;
+    letter-spacing: -1px;
+    position: relative;
+}
+.not-read {
+    background-color: rgba(176, 208, 238, 0.7)
+}
+.notification-text {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    cursor: pointer;
+}
+.notification-text>img {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    flex-shrink: 0;
+}
+.notification-content-container {
+    height: 90%;
+}
+.notification-date {
+    font-size: 12px;
+    color: gray;
+    margin: 0;
+}
+.notification-content {
+    width: 270px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin: 0;
+}
+.notification-delete {
+    position: absolute;
+    top: -5px;
+    right: 2px;
+    user-select: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+.notification-delete:hover {
+    color: red;
+}
+.notification-item:hover>.notification-text {
+    text-decoration: underline;
+}
+/****************************************************/   
+/* 포인트 충전/출금 화면 css */
+/* body */
+#withdrawPointBody{
+    width: 220px;
+    height: 600px;
+    margin: 10px auto;
+    padding: 0;
+}
+/* 제목 */
+#title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    height: 27px;
+}
+#title > p {
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+/* 금액 선택 컨테이너 (2열 배치) */
+.price-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 왼쪽(1열) | 오른쪽(1열) */
+    gap: 10px;
+    margin-bottom: 15px;
+}
+/* 개별 금액 선택 아이템 */
+.price-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* 숨겨진 라디오 버튼 */
+.price-container input[type="radio"]{
+    display: none;
+}
+/* 라벨을 버튼처럼 스타일링 */
+.price-label {
+    display: inline-block;
+    width: 90px; 
+    height: 40px;
+    line-height: 40px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+/* 선택된 버튼 스타일 */
+.price-container input[type="radio"]:checked + .price-label{
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+.price-label:hover {
+    background-color: #e0e0e0;
+}
+/* 수량 입력 및 변경 버튼 컨테이너 */
+.quantity-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+/* 수량 입력 필드 */
+#quantity {
+    width: 50px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+}
+/* 변경 버튼 */
+#updateQuantity1, #updateQuantity2 {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    transition: 0.3s;
+    font-size: 14px;
+}
+#updateQuantity:hover {
+    background-color: #218838;
+}
+/* 총 결제 금액 표시 */
+.totalAmountDisplay {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+/* 결제하기 버튼 영역 */
+#btnArea {
+    display: flex;
+    justify-content: center;
+}
+/* 결제하기 버튼 */
+#chargeBtn {
+    width: 200px;
+    height: 50px;
+    padding: 10px 15px;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#chargeBtn:hover {
+    background-color: transparent;
+    border: 2px solid #6B98F2;
+    color: black;
+}
+/* 계좌정보 입력 컨테이너 */
+.account-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    text-align: left;
+}
+.account-container label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.account-container input{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.account-container select {
+    cursor: pointer;
+}
+.account-container input::placeholder {
+    color: #aaa;
+}
+/****************************************************/
+/* 출금신청 성공/실패 시 화면 */
+.withdrawResult-body{
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f6f8fa;
+}
+.box_section{
+    background: white;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+}
+.check-icon{
+    width: 80px;
+    margin-bottom: 20px;
+}
+.infoTitle{
+    font-size: 24px;
+    color: #333d4b;
+    margin: 0 0 30px;
+}
+.info-grid{
+    margin-top: 20px;
+    text-align: left;
+}
+.info-row{
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e8eb;
+}
+.info-row:last-child{
+    border-bottom: none;
+    justify-content: center;
+}
+.label{
+    font-weight: 700;
+    color: #4e5968;
+}
+.value{
+    font-weight: 400;
+    color: #1d2129;
+}
+#withdrawAmount{
+    margin-left: 46px;
+}
+#afterTotalAmount{
+    margin-left: 40px;
+}
+.info-row2{
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e8eb;
+}
+/****************************************************/
+/* 헤더 충전하기 / 출금신청 모달 */
+.mainModal, .childModal{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+.mainModal-content{
+    width: 300px;
+    margin: auto;
+    border-radius: 10px;
+    background-color: #F8F8F8;
+}
+
+
+
+/* 로그인 모달 전체 영역 */
+#loginModal {
+    display: none; /* 기본은 숨겨진 상태 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  /* 로그인 모달 콘텐츠 */
+  #loginModal-content {
+    background-color: #fff;
+    width: 500px;
+    padding: 40px 30px;
+    border-radius: 16px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* X 버튼 */
+  .loginModal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #555;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  
+  .loginModal-close:hover {
+    transform: scale(1.3) rotate(10deg);
+    color: #222;
+  }
+  
+  /* 모달 열릴 때 애니메이션 */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+.mainModal.show, .childModal.show{ /* 클래스가 show, modal을 동시에 가진 요소 */
+    display: flex;
+    animation-name: show; /* @keyframes show 적용 */
+    animation-duration: 0.5s; /* 애니메이션 수행 시간 */
+}
+.mainModal.hide, .childModal.hide{ /* 클래스가 hide, modal을 동시에 가진 요소 */
+    animation-name: hide; /* @keyframes show 적용 */
+    animation-duration: 0.5s; /* 애니메이션 수행 시간 */
+}
+/* 닫기 버튼 */
+#chargePointModal-close, #withdrawModal-close {
+    position: absolute;
+    top: 110px;
+    right: 760px;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+#chargePointModal-close:hover, #withdrawModal-close:hover, .childModal-close:hover{
+    transform: scale(1.2);
+}
+/* @keyframes : 
+애니메이션 중간중간의 특정 지점들을 거칠 수 있는 키프레임들을 설정함으로써
+CSS 애니메이션 과정의 중간 절차를 제어할 수 있게 합니다.  */
+@keyframes show {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+@keyframes hide {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+/****************************************************/
+/* 헤더 출금신청 성공/실패 모달 */
+.childModal-content{
+    width: 600px;
+    margin: auto;
+    border-radius: 10px;
+    background-color: #F8F8F8;
+}
+/* 닫기 버튼 */
+.childModal-close {
+    position: absolute;
+    top: 240px;
+    right: 610px;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+

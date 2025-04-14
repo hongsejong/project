@@ -1,0 +1,35 @@
+/* footer */
+footer{
+    bottom: 0;
+    margin-top: 100px;
+    /* width: 1920px; */
+    height: 300px;
+    background-image: url(/resources/images/footer.png);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+#footer-menu{
+    width: 1400px;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding: 30px;
+    border-bottom: 3px solid rgb(255, 255, 255, 0.6);
+}
+#footer-menu-logo p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    background: transparent;
+    font-size: 18px;
+}
+#footer-menu-list a{
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}

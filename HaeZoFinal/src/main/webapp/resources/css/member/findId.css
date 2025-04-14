@@ -1,0 +1,90 @@
+/* 기본 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* 전체 페이지 기본 스타일 */
+  body {
+    background-color: #fff;
+    font-family: sans-serif;
+    color: #333;
+  }
+  
+  /* 메인 컨테이너 (고정 너비, 중앙 정렬) */
+  main {
+    width: 320px;
+    margin: 50px auto;
+    text-align: center;
+  }
+  
+  /* 로고 영역 */
+  .logo-area {
+    margin-bottom: 30px;
+  }
+  .logo-area a img {
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  /* 타이틀 */
+  h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+  
+  /* 입력 박스 영역 */
+  .input-box {
+    margin-bottom: 15px;
+  }
+  .input-box input {
+    width: 100%;
+    height: 45px;
+    border: none;
+    border-radius: 20px;
+    padding: 0 15px;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+  }
+  .input-box input::placeholder {
+    color: #aaa;
+  }
+  
+  /* 아이디 찾기 버튼 */
+  .find-btn {
+    width: 100%;
+    height: 45px;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color: #b2ece1; /* 원하는 색상으로 변경 가능 */
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  .find-btn:hover {
+    background-color: #029a4b;
+    transform: translateY(-2px);
+  }
+  
+  /* 비밀번호 찾기 링크 영역 */
+  .redirect-buttons {
+    margin-top: 20px;
+  }
+  .redirect-btn {
+    text-decoration: none;
+    color: #03c75a;
+    font-size: 0.9rem;
+    border: 1px solid #03c75a;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+  }
+  .redirect-btn:hover {
+    background-color: #03c75a;
+    color: #fff;
+  }
+  

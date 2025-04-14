@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="requestBoardAjaxMapper">
+
+
+	<resultMap type="requestSupporter" id="supporter_rm">
+	   <id property="supporterNo" column="SUPPORTER_NO"/>
+	   <result property="supporterNickname" column="MEMBER_NICKNAME"/>
+	   <result property="supporterProfile" column="PROFILE_IMG"/>
+	   <result property="reviewRating" column="AVG_REVIEW_RATING"/>
+	   <result property="categoryName" column="CATEGORY_NAME"/>
+	   <result property="categoryId" column="READ_COUNT"/>
+	   <result property="memberNo" column="MEMBER_NO"/>
+	   <result property="parentCategoryName" column="PARENT_CATEGORY_NAME"/>
+	   <result property="boardCode" column="BOARD_CODE"/>
+	   <result property="topChildCategory" column="TOP_CHILD_CATEGORY"/>
+	   <result property="requestConfirm" column="REQUEST_CONFIRM"/>
+	</resultMap>
+
+	
+	<!-- 요청글에 조력자 비동기 등록 -->
+	<insert id="supportRequestBoard" useGeneratedKeys="true">
+	
+		<selectKey order="BEFORE" resultType="_int" keyProperty="supporterNo">
+			SELECT SEQ_REQUEST_SUPPORTER.NEXTVAL FROM DUAL
+		</selectKey>
+			INSERT INTO REQUEST_SUPPORTER 
+	      	VALUES( #{supporterNo}, DEFAULT, #{memberNo}, #{boardCode} )
+	</insert>	
+	
+	<!-- 요청글 조력자 철회 -->
+	<delete id="withdrawRequestSupporter">
+		DELETE FROM REQUEST_SUPPORTER WHERE SUPPORTER_NO = #{chooseSupporterNo}
+	</delete>
+	
+	<!-- 요청글 조력자 선택 -->
+	<update id="chooseOneSupporter">
+		UPDATE REQUEST_SUPPORTER SET REQUEST_CONFIRM = 'Y' 
+		WHERE BOARD_NO = #{boardNo} AND SUPPORTER_NO = #{chooseSupporterNo}
+	</update>
+	
+	<!-- 의뢰인이 먼저 조력자에게 금액 전송 -->
+	<insert id="sendMoney">
+		INSERT INTO PAYMENT (PAYMENT_NO, MEMBER_NO, PAYMENT_TYPE, PAYMENT_AMOUNT, PAYMENT_DATE, PAYMENT_DESC, ORDER_ID, PAYMENT_KEY)
+		VALUES(NULL, #{requestBoardMemberNo}, 'send', #{requestPrice}, CURRENT_DATE, #{chooseMemberNo} || '번 회원에게 의뢰비 지급',
+						#{requestBoardMemberNickname}, #{boardNo}*1000||'req-s')
+	</insert>
+	
+	<!-- 금액을 보냈을 때 의뢰 상태 업데이트 -->
+	<update id="updateRequestStatus">
+		UPDATE REQUEST SET REQUEST_STATUS = '진행 중' 
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<!-- 의뢰 완료 시 조력자가 금액을 받음 -->
+	<insert id="receiveMoney">
+		INSERT INTO PAYMENT (PAYMENT_NO, MEMBER_NO, PAYMENT_TYPE, PAYMENT_AMOUNT, PAYMENT_DATE, PAYMENT_DESC, ORDER_ID, PAYMENT_KEY)
+		VALUES(NULL, #{chooseMemberNo}, 'receive', #{requestPrice}, CURRENT_DATE, #{requestBoardMemberNo} || '번 회원에게 의뢰비 지급받음',
+						#{chooseSupporterNickname}, #{boardNo}*1000||'req-r')
+	</insert>
+	
+	<!-- 의뢰 완료 상태 업데이트 -->
+	<update id="updateRequestStatusComplete">
+		UPDATE REQUEST SET REQUEST_STATUS = '완료' 
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<!-- 리뷰 작성 -->
+	<insert id="writeReview">
+		INSERT INTO REVIEW 
+		VALUES(#{boardNo}, #{content},  #{rating})
+	</insert>
+	
+</mapper>

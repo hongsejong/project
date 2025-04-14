@@ -1,0 +1,84 @@
+#selectPaymentMain{
+    min-height: 100vh;
+}
+body {
+    width: 1920px;
+    margin: 0 auto;
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
+    background-color: #F8F8F8;
+    box-sizing: border-box;
+}
+/* 컨테이너 */
+#container {
+    max-width: 1320px;
+    margin: 70px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+/* 오류 메시지 */
+.error-message {
+    padding: 15px;
+    background-color: #FFDDDD;
+    color: #D8000C;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+/* 테이블 스타일 */
+.payment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+}
+.payment-table th, .payment-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+.payment-table th {
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.payment-table th:hover {
+    background-color: #555;
+}
+/* 짝수 줄 색상 변경 */
+.payment-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+/* 행 hover 효과 */
+.payment-table tr:hover {
+    background-color: #f1f1f1;
+}
+/* 영수증 링크 스타일 */
+.receipt-link {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+.receipt-link:hover {
+    text-decoration: underline;
+}
+/* 더 보기 버튼 */
+#loadMoreBtn {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+#loadMoreBtn:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="requestBoardMapper">
+
+	<resultMap type="Board" id="board_rm">
+	   <id property="boardNo" column="BOARD_NO"/>
+	   <result property="boardTitle" column="BOARD_TITLE"/>
+	   <result property="boardContent" column="BOARD_CONTENT"/>
+	   <result property="boardCreateDate" column="B_CREATE_DATE"/>
+	   <result property="boardUpdateDate" column="B_UPDATE_DATE"/>
+	   <result property="readCount" column="READ_COUNT"/>
+	   <result property="boardCode" column="BOARD_CODE"/>
+	   <result property="memberNo" column="MEMBER_NO"/>
+	   <result property="memberNickname" column="MEMBER_NICKNAME"/>
+	   <result property="profileImage" column="PROFILE_IMG"/>
+	   <result property="thumbnail" column="THUMBNAIL"/>
+	   
+	   <!-- 의뢰 전용 프로퍼티 -->
+	   <result property="requestPrice" column="REQUEST_PRICE"/>
+	   <result property="requestStatus" column="REQUEST_STATUS"/>
+	   <result property="requestLocation" column="REQUEST_LOCATION"/>
+	   <result property="categoryName" column="CATEGORY_NAME"/>
+	   <result property="parentCategoryName" column="PARENT_CATEGORY_NAME"/>
+	   <result property="requestDueDate" column="REQUEST_DUEDATE"/>
+	   <result property="requestStartDate" column="REQUEST_START_DATE"/>
+	   <result property="requestCondition" column="REQUEST_CONDITION"/>
+	   <result property="requestEtc" column="REQUEST_ETC"/>
+	   <result property="categoryId" column="CATEGORY_ID"/>
+	</resultMap>
+	
+	<!-- Request resultMap -->
+	<resultMap type="RequestBoard" id="requestBoard_rm">
+	   <id property="boardNo" column="BOARD_NO"/>
+	   <result property="boardTitle" column="BOARD_TITLE"/>
+	   <result property="boardContent" column="BOARD_CONTENT"/>
+	   <result property="boardCreateDate" column="B_CREATE_DATE"/>
+	   <result property="boardUpdateDate" column="B_UPDATE_DATE"/>
+	   <result property="boardCode" column="BOARD_CODE"/>
+	   <result property="memberNo" column="MEMBER_NO"/>
+	   <result property="memberNickname" column="MEMBER_NICKNAME"/>
+	   <result property="profileImage" column="PROFILE_IMG"/>
+	   
+	   <result property="requestStartDate" column="REQUEST_START_DATE"/>
+	   <result property="requestPrice" column="REQUEST_PRICE"/>
+	   <result property="requestDueDateSql" column="REQUEST_DUEDATE"/>
+	   <result property="requestDueDate" column="REQUEST_DUEDATE_SQL"/>
+	   <result property="requestStatus" column="REQUEST_STATUS"/>
+	   <result property="requestLocation" column="REQUEST_LOCATION"/>
+	   <result property="hiddenCategoryId" column="CATEGORY_ID"/>
+	   <result property="parentCategoryId" column="PARENT_NO"/>
+	   <result property="categoryName" column="CATEGORY_NAME"/>
+	   <result property="parentCategoryName" column="PARENT_CATEGORY_NAME"/>
+	   <result property="hiddenThumbnailUrl" column="THUMBNAIL"/>
+	</resultMap>
+	
+	<!-- RequestSupporter resultMap -->
+	<resultMap type="RequestSupporter" id="supporter_rm">
+		<id property="supporterNo" column="SUPPORTER_NO"/>
+		<result property="supporterNickname" column="MEMBER_NICKNAME"/>
+		<result property="supporterProfile" column="PROFILE_IMG"/>
+		<result property="reviewRating" column="AVG_REVIEW_RATING"/>
+		<result property="categoryName" column="CATEGORY_NAME"/>
+		<result property="parentCategoryName" column="PARENT_CATEGORY_NAME"/>
+		<result property="categoryId" column="CATEGORY_ID"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="boardCode" column="BOARD_CODE"/>
+		<result property="topChildCategory" column="TOP_CHILD_CATEGORY"/>
+	   <result property="requestConfirm" column="REQUEST_CONFIRM"/>
+	</resultMap>
+	
+	<resultMap type="Files" id="files_rm">
+	   <id property="fileNo" column="FILE_NO"/>
+	   <result property="filePath" column="FILE_PATH"/>
+	   <result property="fileRename" column="FILE_RENAME"/>
+	   <result property="fileOriginal" column="FILE_ORIGINAL"/>
+	   <result property="fileOrder" column="FILE_ORDER"/>
+	   <result property="boardNo" column="BOARD_NO"/>
+	</resultMap>
+	
+	<!-- 의뢰 요청 게시판의 삭제되지 않은 미완료 의뢰 수 조회 -->
+	<select id="requestBoardListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM REQUEST R 
+		JOIN BOARD B ON (B.BOARD_NO = R.BOARD_NO)
+		WHERE 
+		
+		<if test="categoryId &gt; 0 and categoryId &lt; 6">
+			R.CATEGORY_ID IN
+				(SELECT C.CATEGORY_ID FROM CATEGORY C WHERE C.PARENT_NO =  #{categoryId}) AND
+		</if>
+		<if test="categoryId &gt;= 6">
+			CATEGORY_ID = #{categoryId} AND
+		</if>
+		BOARD_DEL_FL = 'N'	AND REQUEST_STATUS IN('대기', '진행 중') 
+	</select>
+	
+	
+	<!-- 의뢰 게시글 목록 조회 -->
+	<select id="selectRequestBoardList" resultMap="requestBoard_rm">
+		SELECT BOARD_TITLE, REQUEST_PRICE, REQUEST_STATUS, 
+		REQUEST_LOCATION, R.CATEGORY_ID, CATEGORY_NAME, MEMBER_NICKNAME, R.BOARD_NO, R.THUMBNAIL, C.PARENT_NO,
+		(SELECT FILE_PATH || FILE_RENAME FROM "FILE" F
+		WHERE F.BOARD_NO = R.BOARD_NO 
+		AND FILE_ORDER = 0) FILE_THUMBNAIL,
+		TO_CHAR(REQUEST_DUEDATE, 'YYYY-MM-DD') REQUEST_DUEDATE_SQL
+		<trim prefix="," suffixOverrides=",">
+		    <if test="categoryId == 0">
+		        '전체' AS PARENT_CATEGORY_NAME
+		    </if>
+		    <if test="categoryId &gt; 0 and categoryId &lt; 6">
+		        (SELECT CATEGORY_NAME FROM CATEGORY WHERE CATEGORY_ID = #{categoryId}) AS PARENT_CATEGORY_NAME
+		    </if>
+			<if test="categoryId &gt;= 6">
+				 (SELECT C2.CATEGORY_NAME FROM CATEGORY C2 WHERE C2.CATEGORY_ID = 
+			    	(SELECT C3.PARENT_NO FROM CATEGORY C3 WHERE C3.CATEGORY_ID = #{categoryId})) AS PARENT_CATEGORY_NAME
+			</if>
+		    
+		</trim>
+		FROM REQUEST R 
+		JOIN BOARD B ON (B.BOARD_NO = R.BOARD_NO)
+		JOIN MEMBER M ON (B.MEMBER_NO=M.MEMBER_NO)
+		JOIN CATEGORY C ON (R.CATEGORY_ID = C.CATEGORY_ID)
+		WHERE BOARD_DEL_FL = 'N' AND REQUEST_STATUS IN('대기', '진행 중') 
+		<if test="categoryId &gt; 0 and categoryId &lt; 6">
+			 AND R.CATEGORY_ID IN
+				(SELECT C.CATEGORY_ID FROM CATEGORY C WHERE C.PARENT_NO =  #{categoryId})
+		</if>
+		<if test="categoryId &gt;= 6">
+			 AND R.CATEGORY_ID = #{categoryId} 
+		</if>
+		ORDER BY R.BOARD_NO DESC
+	</select>
+	
+	<!--  의뢰 게시글 상세 조회 -->
+	<select id="requestBoardDetail" resultMap="requestBoard_rm">
+			SELECT R.BOARD_NO, B.BOARD_TITLE, B.BOARD_CONTENT, R.REQUEST_PRICE, R.REQUEST_STATUS, 
+			R.REQUEST_LOCATION, R.REQUEST_CONDITION, R.REQUEST_ETC, R.CATEGORY_ID, C.CATEGORY_NAME,
+			M.MEMBER_NICKNAME, M.MEMBER_NO, M.PROFILE_IMG, B.BOARD_CODE, C.PARENT_NO,
+				TO_CHAR(B.B_CREATE_DATE, 'YYYY.MM.DD HH24:MI') B_CREATE_DATE, 
+				TO_CHAR(B.B_UPDATE_DATE, 'YYYY.MM.DD HH24:MI') B_UPDATE_DATE,
+				TO_CHAR(R.REQUEST_START_DATE, 'YYYY-MM-DD') REQUEST_START_DATE,
+				TO_CHAR(R.REQUEST_DUEDATE, 'YYYY-MM-DD') REQUEST_DUEDATE_SQL,
+			    (SELECT C2.CATEGORY_NAME FROM CATEGORY C2 WHERE C2.CATEGORY_ID = 
+			    	(SELECT C3.PARENT_NO FROM CATEGORY C3 WHERE C3.CATEGORY_ID = #{categoryId})) AS PARENT_CATEGORY_NAME
+			FROM REQUEST R
+			JOIN BOARD B ON (B.BOARD_NO = R.BOARD_NO)
+			JOIN MEMBER M ON (B.MEMBER_NO=M.MEMBER_NO)
+			JOIN CATEGORY C ON (R.CATEGORY_ID = C.CATEGORY_ID)
+			WHERE B.BOARD_DEL_FL = 'N' AND R.BOARD_NO = #{boardNo}
+			
+	</select>
+	
+	<!-- DB 파일 조회 -->
+	<select id="getRequestBoardFiles" resultMap="files_rm">
+		SELECT * FROM "FILE" WHERE BOARD_NO=#{boardNo} ORDER BY FILE_ORDER
+	</select>
+	
+	
+	<!-- 요청글 BOARD 테이블에 먼저 삽입 -->
+	<insert id="insertBoard" useGeneratedKeys="true">
+	
+		<selectKey order="BEFORE" resultType="_int" keyProperty="boardNo">
+			SELECT SEQ_BOARD_NO.NEXTVAL FROM DUAL
+		</selectKey>
+			INSERT INTO BOARD 
+	      	VALUES( #{boardNo}, #{boardTitle}, #{boardContent}, 
+	      	CURRENT_DATE, DEFAULT, DEFAULT, DEFAULT, #{memberNo}, 5, DEFAULT, DEFAULT)
+	</insert>
+	
+	<!-- 요청글 삽입 -->
+	<insert id="insertRequestBoard">
+			INSERT INTO REQUEST 
+			VALUES( #{boardNo}, ' ', CURRENT_DATE, #{requestDueDateSql}, #{requestPrice}, '대기', #{requestLocation}, ' ', #{hiddenCategoryId}, #{hiddenThumbnailUrl})
+	</insert>
+	
+	
+	<!-- 요청글 BOARD 테이블 먼저 수정 -->
+	<update id="updateBoard">
+		UPDATE BOARD
+		SET BOARD_TITLE = #{boardTitle}, BOARD_CONTENT = #{boardContent}, B_UPDATE_DATE = CURRENT_DATE
+		WHERE BOARD_NO=#{boardNo}
+	</update>
+	
+	<!-- 요청글 수정 -->
+	<update id="updateRequestBoard">
+		UPDATE REQUEST
+		SET REQUEST_LOCATION = #{requestLocation}, REQUEST_DUEDATE = #{requestDueDateSql}, 
+		REQUEST_PRICE = #{requestPrice}, CATEGORY_ID = #{hiddenCategoryId}, THUMBNAIL = #{hiddenThumbnailUrl}
+		WHERE BOARD_NO=#{boardNo}
+	</update>
+	
+	<!-- 요청글 삭제 -->
+	<update id="deleteRequestBoard">
+		UPDATE BOARD SET BOARD_DEL_FL = 'Y' WHERE BOARD_NO=#{boardNo}
+	</update>
+	
+	<!-- 의뢰 게시글 검색 조회 -->
+	<select id="searchSelectRequestBoardList" resultMap="requestBoard_rm">
+		SELECT BOARD_TITLE, REQUEST_PRICE, REQUEST_STATUS, 
+		REQUEST_LOCATION, R.CATEGORY_ID, CATEGORY_NAME, MEMBER_NICKNAME, R.BOARD_NO, R.THUMBNAIL, C.PARENT_NO,
+		TO_CHAR(REQUEST_DUEDATE, 'YYYY-MM-DD') REQUEST_DUEDATE_SQL
+		<trim prefix="," suffixOverrides=",">
+		    <if test="hiddenCategoryId == 0">
+		        '전체' AS PARENT_CATEGORY_NAME
+		    </if>
+		    <if test="hiddenCategoryId &gt; 0 and hiddenCategoryId &lt; 6">
+		        (SELECT CATEGORY_NAME FROM CATEGORY WHERE CATEGORY_ID = #{hiddenCategoryId}) AS PARENT_CATEGORY_NAME
+		    </if>
+		    <if test="hiddenCategoryId &gt;= 6">
+				 (SELECT C2.CATEGORY_NAME FROM CATEGORY C2 WHERE C2.CATEGORY_ID = 
+			    	(SELECT C3.PARENT_NO FROM CATEGORY C3 WHERE C3.CATEGORY_ID = #{hiddenCategoryId})) AS PARENT_CATEGORY_NAME
+			</if>
+		</trim>
+		FROM REQUEST R 
+		JOIN BOARD B ON (B.BOARD_NO = R.BOARD_NO)
+		JOIN MEMBER M ON (B.MEMBER_NO=M.MEMBER_NO)
+		JOIN CATEGORY C ON (R.CATEGORY_ID = C.CATEGORY_ID)
+		WHERE BOARD_DEL_FL = 'N' AND REQUEST_STATUS IN('대기', '진행 중') 
+		
+		<if test="hiddenCategoryId &gt; 0 and hiddenCategoryId &lt; 6">
+			 AND R.CATEGORY_ID IN
+				(SELECT C.CATEGORY_ID FROM CATEGORY C WHERE C.PARENT_NO =  #{hiddenCategoryId}) 
+		</if>
+		 <if test='hiddenCategoryId &gt;= 6'>
+			 AND R.CATEGORY_ID = #{hiddenCategoryId} 
+		</if>
+		 <if test='hiddenRegionSido != "regionSidoAll" and hiddenRegionSigungu == "regionSigunguAll"'>
+			 AND R.REQUEST_LOCATION LIKE '%${hiddenRegionSido}%'
+		</if>
+		<if test='hiddenRegionSido != "regionSidoAll" and hiddenRegionSigungu != "regionSigunguAll"'>
+			 AND R.REQUEST_LOCATION LIKE '%${hiddenRegionSido} ${hiddenRegionSigungu}%'
+		</if>
+		 <if test="requestDueDate != null and requestDueDate != ''">
+		    AND TRUNC(REQUEST_DUEDATE) = TO_DATE(#{requestDueDate}, 'YYYY-MM-DD')
+		</if>
+		 AND R.REQUEST_PRICE BETWEEN #{hiddenMinPrice} AND #{hiddenMaxPrice}
+		
+		<choose>
+		
+			<!-- 제목 -->
+	        <when test='hiddenSearchCategory == "searchTitle"'>
+	            AND B.BOARD_TITLE LIKE '%' || #{query} || '%'
+	        </when>
+	
+	        <!-- 내용 -->
+	        <when test='hiddenSearchCategory == "searchContent"'>
+	            AND B.BOARD_CONTENT LIKE '%' || #{query} || '%'
+	        </when>
+	
+	        <!-- 의뢰인 닉네임 -->
+	        <when test='hiddenSearchCategory == "searchRequester"'>
+	            AND M.MEMBER_NICKNAME LIKE '%' || #{query} || '%'
+	        </when>
+	
+	        <!-- 전체 검색 -->
+	        <when test='hiddenSearchCategory == "searchAll"'>
+	            AND (
+	                B.BOARD_TITLE LIKE '%' || #{query} || '%' OR 
+	                B.BOARD_CONTENT LIKE '%' || #{query} || '%' OR 
+	                M.MEMBER_NICKNAME LIKE '%' || #{query} || '%'
+	            )
+	        </when>
+			
+		</choose>
+		
+		ORDER BY R.BOARD_NO DESC
+	</select>
+	
+	<!-- 요청글 조력자 모두 조회 -->
+	<select id="selectRequestSupporter" resultMap="supporter_rm" >
+		SELECT R.MEMBER_NO, M.MEMBER_NICKNAME, M.PROFILE_IMG, R.SUPPORTER_NO, R.REQUEST_CONFIRM,
+		          TO_CHAR(TRUNC(NVL(AVG(V.REVIEW_RATING), 0), 1), '0.0') AS AVG_REVIEW_RATING
+		    FROM REQUEST_SUPPORTER R
+		    JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO AND M.MEMBER_DEL_FL = 'N' AND M.MEMBER_BAN = 'N'
+		    JOIN BOARD B ON B.BOARD_NO = R.BOARD_NO AND B.BOARD_DEL_FL = 'N'
+		    LEFT JOIN REVIEW V 
+			    ON V.BOARD_NO IN (
+			        SELECT B2.BOARD_NO
+			        FROM BOARD B2
+			        JOIN REQUEST_SUPPORTER R2 ON B2.BOARD_NO = R2.BOARD_NO
+			        WHERE R2.MEMBER_NO = R.MEMBER_NO
+			    )
+		    WHERE R.BOARD_NO = #{boardNo}
+		    GROUP BY R.MEMBER_NO, M.MEMBER_NICKNAME, M.PROFILE_IMG, R.SUPPORTER_NO, R.REQUEST_CONFIRM
+		    ORDER BY AVG_REVIEW_RATING DESC
+	</select>
+
+	<!-- 요청글에서 선택한 조력자 조회 -->
+	<select id="acceptRequestSupporter" resultMap="supporter_rm">
+		    <!-- 각 MEMBER_NO별로 REVIEW_RATING의 평균을 계산하고 회원 정보를 포함 -->
+		    SELECT R.MEMBER_NO, M.MEMBER_NICKNAME, M.PROFILE_IMG, R.SUPPORTER_NO, R.REQUEST_CONFIRM,
+		           TO_CHAR(TRUNC(NVL(AVG(V.REVIEW_RATING), 0), 1), '0.0') AS AVG_REVIEW_RATING
+		    FROM REQUEST_SUPPORTER R
+		    JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO AND M.MEMBER_DEL_FL = 'N' AND M.MEMBER_BAN = 'N'
+		    JOIN BOARD B ON B.BOARD_NO = R.BOARD_NO AND B.BOARD_DEL_FL = 'N'
+		    LEFT JOIN REVIEW V 
+			    ON V.BOARD_NO IN (
+			        SELECT B2.BOARD_NO
+			        FROM BOARD B2
+			        JOIN REQUEST_SUPPORTER R2 ON B2.BOARD_NO = R2.BOARD_NO
+			        WHERE R2.MEMBER_NO = R.MEMBER_NO
+			    )
+		    WHERE R.REQUEST_CONFIRM = 'Y' AND R.BOARD_NO = #{boardNo}
+		    GROUP BY R.MEMBER_NO, M.MEMBER_NICKNAME, M.PROFILE_IMG, R.SUPPORTER_NO, R.REQUEST_CONFIRM
+	</select>
+	
+	<!-- 리뷰 개수 조회 -->
+	<select id="reviewCount" resultType="_int">
+		SELECT COUNT(*) FROM REVIEW WHERE BOARD_NO = #{boardNo}
+	</select>
+</mapper>

@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+*{
+    font-family: "Noto Sans KR";
+}
+
+a{
+    text-decoration: none;
+    color: black;
+
+}
+
+
+/* 왼쪽 버튼(로그인, 마이페이지) */
+#myPage-btn {
+    border: 10px solid #094580;
+    background-color: #094580;
+    
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    
+}
+
+/* 오른쪽 버튼(회원가입, 로그아웃) */
+#logout-btn {
+    border: 10px solid #37B320;
+    background-color: #37B320;
+
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+
+:root {
+    --primary-blue: #2563eb;
+    --second-blue: #3b82f6;
+    --third-blue: #bfdbfe;
+    
+    --accent-yellow: #ffcf57;
+    --second-yellow: #fef3c7;
+    
+    --white: #ffffff;
+    --back: #f1f5f9;
+    
+    --a: #0ea5e9;
+    --b: #2563eb;
+  }
+
+
+*{box-sizing: border-box;}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button {
+    transition: all 0.2s ease-in-out;
+  }
+  
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+
+    margin: 0;
+}
+
+/* profile section */
+.profile-section {
+    width: 300px;
+    background-color: var(--white);
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #1e293b;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+.profile-section img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    align-self: center;
+    object-fit: cover;
+    border: 3px solid var(--third-blue);
+    transition: all 0.3s ease;
+}
+
+.profile-section img:hover{
+    transform: scale(1.05);
+    border-color: var(--primary-blue);
+    transition: all 0.3s ease;
+}
+
+.profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.myInfo{
+    height: 50px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-left: 20px;
+
+    font-weight: 600;
+
+    background-color: var(--third-blue);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+
+}
+
+.myName, .subDate{
+    height: 30px;
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: gray;
+
+    margin-top: 10px;
+}
+
+.subDate {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.myName{
+color: #1e293b;
+font-weight: bold;
+margin-top: 20px;
+font-size: 1.1rem;
+}
+
+.myAct{
+    background-color: var(--third-blue);
+    width: 250px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+
+    font-weight: bold;
+    border-radius: 12px;
+}
+
+.myActContent{
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    width: 250px; 
+    padding: 10px;
+}
+
+.myActContent > img{
+    max-width: 50px; 
+    height: auto; 
+}
+
+.myActDiv2{
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 15px 10px;
+}
+
+.myActDiv2 > div{
+    padding: 5px 0;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    color: #475569;
+}
+
+.myActDiv2 span {
+    display: inline-block;
+    margin-left: 5px; 
+    text-align: right;
+}
+
+.profileFAQ{
+    border-radius: 12px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ccc;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 100px;
+}
+
+.profileFAQ > a{
+    color: black;
+    text-decoration: none;
+}
+
+
+
+.notice{
+    background-color: #ccc;
+    border-radius: 12px;
+}
+
+.notice p {
+    padding-left: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.notice li {
+    padding: 5px 0;
+}
+
+.notice li > a{
+    color: black;
+    text-decoration: none;
+}
+
+.leftCon{
+    width: 300px;
+    background-color: var(--white);
+    margin-left: -400px;
+    height: 100%;
+}
+
+.main-content {
+    width: 1030px;
+    margin-left: 110px;
+}
+
+/* container */
+.container {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+/* --------- 여기까지----------- */
+
+

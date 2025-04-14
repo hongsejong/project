@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>의뢰 요청 게시판 게시글 작성 페이지</title>
+    
+    <link rel="stylesheet" href="../../resources/css/kds/requestBoardWriter.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- font awesome 라이브러리 추가 + key 등록 -->
+<script src="https://kit.fontawesome.com/c91aef3408.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+
+    </header>
+    <nav>
+        <h3>주요 카테고리</h3>
+        <ul>
+            
+            <li><img src="../../resources/images/kds/Design.png" alt=""><a href="/requestBoard/1?cp=1"> 취업 / 직무 / 입시</a></li>
+            <li><img src="../../resources/images/kds/Camera.png" alt=""><a href="/requestBoard/2?cp=1"> 영상 / 사진 / 음향</a></li>
+            <li><img src="../../resources/images/kds/Tools.png" alt=""><a href="/requestBoard/3?cp=1"> 설치 / 수리</a></li>
+            <li><img src="../../resources/images/kds/artistPalette.png" alt=""><a href="/requestBoard/4?cp=1"> 취미 / 자기계발</a></li>
+            <li><img src="../../resources/images/kds/hands.png" alt=""><a href="/requestBoard/5?cp=1"> 단순의뢰</a></li>
+
+        </ul>
+        
+    </nav>
+    <main>
+        <section class="requestBoardTitle">
+            <div class="requestBoardTitleDiv">
+                <input type="text" name="boardTitle" id="boardTitle" placeholder="제목 입력">
+            </div>
+        </section>
+
+        <section class="requestBoardImages">
+            <h2>업로드 이미지</h2>
+            <div class="img-box">
+                <div class="boardImg">
+                    <label for="img0">
+                        <img class="preview" src="">
+                    </label>
+                    <input type="file" name="images" class="inputImage" id="img0" accept="image/*">
+                    <span class="delete-image">&times;</span>
+                </div>
+
+                <div class="boardImg">
+                    <label for="img1">
+                        <img class="preview" src="">
+                    </label>
+                    <input type="file" name="images" class="inputImage" id="img1" accept="image/*">
+                    <span class="delete-image">&times;</span>
+                </div>
+
+                <div class="boardImg">
+                    <label for="img2">
+                        <img class="preview" src="">
+                    </label>
+                    <input type="file" name="images" class="inputImage" id="img2" accept="image/*">
+                    <span class="delete-image">&times;</span>
+                </div>
+
+                <div class="boardImg">
+                    <label for="img3">
+                        <img class="preview" src="">
+                    </label>
+                    <input type="file" name="images" class="inputImage" id="img3" accept="image/*">
+                    <span class="delete-image">&times;</span>
+                </div>
+
+                <div class="boardImg">
+                    <label for="img4">
+                        <img class="preview" src="">
+                    </label>
+                    <input type="file" name="images" class="inputImage" id="img4" accept="image/*">
+                    <span class="delete-image">&times;</span>
+                </div>
+                <!-- <div id="addBoardImgBoxBtn">
+                    <i class="fa-solid fa-plus"></i>
+                </div> -->
+
+            </div>
+
+        </section>
+        <section class="requestBoardRegionCategory">
+            <div class="requestBoardRegionCategoryDiv">
+                <span class="requestBoardRegion">지역 선택</span>
+                <span class="requestBoardCategory">카테고리 선택</span>
+            </div>
+        </section>
+        <section class="requestBoardContent">
+
+            <form action="#" name="requestBoardForm" id="requestBoardForm" method="POST" enctype="multipart/form-data">
+                <div class="requestBoardnputDiv">
+                    <div>의뢰 내용</div>
+                    <textarea name="requestContent" id="requestContent"></textarea>
+                </div>
+                <div class="requestBoardnputDiv">
+                    <div>의뢰 조건</div>
+                    <textarea name="requestCondition" id="requestCondition"></textarea>
+                </div>
+                <div class="requestBoardnputDiv">
+                    <div>의뢰 기한</div>
+                    <div>
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="requestBoardnputDiv">
+                    <div>의뢰 가격</div>
+                    <div>
+                        <input type="text" name="requestPrice" id="requestPrice"/>원
+                    </div>
+                </div>
+                <div class="requestBoardnputDiv">
+                    <div>기타 요청사항</div>
+                    <textarea name="requestCondition" id="requestCondition"></textarea>
+                </div>
+            </form>
+        </section>
+
+        <!-- 팝업 창 -->
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 class="modal-h2">의뢰를 등록하시려는 경우 다음 주의사항에 모두 동의해주세요.</h2>
+                    <button class="close-modal" id="closeModal">X</button>
+                </div>
+                <div class="modal-body">
+                    <p>주의사항 1 : 머시기</p>
+                    <p>주의사항 2 : 머시기</p>
+                    <p>주의사항 3 : 머시기</p>
+                    <p>주의사항 4 : 머시기</p>
+                </div>
+                <div class="modal-agree">
+                    <label for="agreeCheck">
+                        <input type="checkbox" name="agreeCheck" id="agreeCheck"> 위 주의사항에 동의합니다.
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="requestConfirmBtn">등록</button>
+                    <button id="requestNoConfirmBtn">취소</button>
+                </div>
+            </div>
+        </div>
+
+
+        <section class="requestBoardBtnBox">
+            <div>
+                <button id="requestNoBtn">취소</button>
+                <button id="requestBtn">등록</button>
+            </div>
+            <div>
+                <button id="goToListBtn">목록으로</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../resources/js/kds/requestBoardWriter.js"></script>
+</body>
+</html>

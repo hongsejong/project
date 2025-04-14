@@ -1,0 +1,193 @@
+
+#singohagi{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-bottom: 2px solid #808080;
+    padding: 20px;
+    font-weight: bold;
+}
+#img-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+#profileImg{
+    width: 110px;
+    height: 100px;
+}
+#user-text{
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+}
+
+select {
+    display: inline-block;
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    width: 550px;
+    height: 60px;
+    color: #808080;
+    font-size: 15px;
+}
+
+
+#singodiv{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+#sede{
+    color: #808080;
+}
+.sinsintext{
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+#singodiv-b{
+    display: flex;
+    justify-content: center;
+}
+
+#singo-textarea{
+    width: 550px;
+    height: 230px;
+    resize: none;
+    border: 1px solid #d9d9d9;
+}
+
+#singo-div-c{
+    display: flex;
+    justify-content: center;
+    
+}
+#singo-input{
+    width: 550px;
+}
+
+#submitbtn{
+    margin-top: 30px;
+    width: 100%;
+    height: 70px;
+    color: white;
+    background-color: #6B98F2;
+    border: none;
+}
+
+#singo-input{
+    font-size: 15px;
+    border: 2px solid #d9d9d9;
+    padding: 5px;
+    background-color: #f0f0f0; /* 배경색 */
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+#singo-input:hover {
+    border-color: #66E4F2;
+    background-color: #e6f7ff;
+}
+#singo-input:focus {
+    outline: none;
+    border-color: #66E4F2;
+}
+
+/* 파일 인풋 */
+ #singo-input {
+    display: none;
+}
+
+.file-label {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #66E4F2; 
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 500px;
+}
+
+.file-label:hover {
+    background-color: #5BC2D9;
+    transform: scale(1.05); 
+}
+
+.file-label:active {
+    background-color: #45A9B8;
+}
+
+/* 파일명 표시 영역 */
+.file-name {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+#singo-div-c{
+    min-width: 500px;
+}
+#file-a{
+    text-align: center;
+
+}
+
+#btn-area{
+    margin-top: 30px;
+    text-align: center;
+}
+.musibtn{
+    color: white;
+    background-color: #66E4F2;
+    border: none;
+    width: 200px;
+    height: 50px;
+    border-radius: 3px;
+    margin-left: 30px;
+}
+
+.center{
+    text-align: center;
+}
+#sintitle{
+    width: 550px;
+    margin-bottom: 30px;
+}
+
+#titleinput{
+    width: 550px;
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    width: 550px;
+    height: 40px;
+    color: #808080;
+}
+/* 파일 영역 컨테이너 */
+#file-a {
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd;    
+    padding: 10px;             
+    border-radius: 4px;        
+    margin: 10px 0;          
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);  
+}
+
+/* 파일 링크 스타일 */
+#file-a a {
+    text-decoration: none;   
+    color: #337ab7;           
+    font-weight: 500;        
+    display: inline-block;      
+    margin-bottom: 4px;        
+    transition: color 0.3s ease, transform 0.3s ease;
+    
+}
+
+#file-a a:hover {
+    color: #23527c;             
+    transform: translateY(-1px); 
+}

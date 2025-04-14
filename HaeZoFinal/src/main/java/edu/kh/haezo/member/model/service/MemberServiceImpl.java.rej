@@ -1,0 +1,22 @@
+diff a/HaeZoFinal/src/main/java/edu/kh/haezo/member/model/service/MemberServiceImpl.java b/HaeZoFinal/src/main/java/edu/kh/haezo/member/model/service/MemberServiceImpl.java	(rejected hunks)
+@@ -34,17 +34,20 @@
+  		
+  		return loginMember;
+  	}
+++<<<<<<< HEAD
+ +	
+ +	@Transactional(rollbackFor = {Exception.class})
+ +	@Override
+ +	public int signUp(Member inputMember) {
+ +		
+ +		//비밀번호를 BCrypt를 이용하여 암호화 후 inputMember에 세팅
+ +		String encPw =bcrypt.encode(inputMember.getMemberPw());
+ +		inputMember.setMemberPw(encPw);
+ +		
+ +		// DAO호출
+ +		int result =dao.signUp(inputMember);
+ +		return result;
+ +	}
+++=======
+++>>>>>>> parent of 319a35c (Merge pull request #80 from HaeZoFinal/JUNGTAEKJUNG)
+  }

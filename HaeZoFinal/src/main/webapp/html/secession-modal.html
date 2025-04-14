@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>메인 페이지 + 모달 예시</title>
+  <style>
+    /* 메인 페이지 스타일 (예시) */
+    .main-content {
+      text-align: center;
+      margin-top: 100px;
+    }
+    .bottom-btns {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .btn-box {
+      flex: 1;
+      max-width: 150px;
+      background-color: #C2E5D0;
+      border: 1px solid #AAD7BF;
+      border-radius: 15px;
+      padding: 15px 0;
+      text-align: center;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .btn-box:hover {
+      background-color: #5A67D8;
+      color: #fff;
+      transform: translateY(-3px);
+    }
+    
+    /* 모달 스타일 */
+    .modal-overlay {
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.5);
+      display: none; /* 기본 숨김 */
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .modal-container {
+      position: relative;
+      width: 500px;
+      background-color: #52ceb8;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      padding: 40px;
+      text-align: center;
+      color: #333;
+      font-family: sans-serif;
+    }
+    .modal-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="%23ffffff33" stroke-width="2" d="M0 70 Q100 140 220 50 T400 60" /><path fill="none" stroke="%23ffffff33" stroke-width="2" d="M0 160 Q100 220 220 130 T400 140" /><path fill="none" stroke="%23ffffff33" stroke-width="2" d="M0 250 Q100 320 220 230 T400 240" /></svg>') no-repeat center / cover;
+      opacity: 0.3;
+      z-index: 0;
+    }
+    .modal-content {
+      position: relative;
+      z-index: 1;
+    }
+    .modal-content h2 {
+      margin-bottom: 15px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #000;
+    }
+    .modal-content p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      color: #222;
+    }
+    .notice-list {
+      text-align: left;
+      margin-bottom: 25px;
+      color: #222;
+    }
+    .notice-list li {
+      margin-bottom: 10px;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    .modal-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .modal-btn-group button {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 14px 0;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .modal-btn-group button:hover {
+      background-color: #333;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <!-- 메인 페이지 내용 -->
+  <div class="main-content">
+    <h1>메인 페이지</h1>
+    <div class="bottom-btns">
+      <div class="btn-box" id="cancelBtn">취소 버튼</div>
+      <div class="btn-box" id="confirmBtn">확인 버튼</div>
+    </div>
+  </div>
+
+  <!-- 모달 (기본 숨김) -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-container">
+      <div class="modal-content">
+        <h2>계정탈퇴</h2>
+        <p>계정 탈퇴 시 다음 사항들을 꼭 확인해 주세요.</p>
+        <ul class="notice-list">
+          <li>보유 포인트, 쿠폰 등 모든 혜택이 사라집니다.</li>
+          <li>진행 중인 주문 및 거래 내역은 복구할 수 없습니다.</li>
+          <li>프로필, 닉네임 등 회원정보가 완전히 삭제됩니다.</li>
+          <li>재가입하더라도 이전 데이터는 복원되지 않습니다.</li>
+          <li>탈퇴 후에는 동일 아이디로 재가입이 불가할 수 있습니다.</li>
+        </ul>
+        <div class="modal-btn-group">
+          <button id="modalCancelBtn">취소 (취소 버튼)</button>
+          <button id="modalWithdrawBtn">계정 탈퇴 (탈퇴 버튼)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 메인 페이지 버튼 참조
+    const confirmBtn = document.getElementById('confirmBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    
+    // 모달 요소 및 모달 내부 버튼 참조
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalCancelBtn = document.getElementById('modalCancelBtn');
+    const modalWithdrawBtn = document.getElementById('modalWithdrawBtn');
+
+    // 메인 페이지 "확인 버튼" 클릭 시 모달 표시
+    confirmBtn.addEventListener('click', () => {
+      modalOverlay.style.display = 'flex';
+    });
+
+    // 메인 페이지 "취소 버튼" (필요 시 다른 로직 구현 가능)
+    cancelBtn.addEventListener('click', () => {
+      alert('취소 버튼 클릭됨');
+    });
+
+    // 모달의 "취소" 버튼 클릭 시 모달 닫기
+    modalCancelBtn.addEventListener('click', () => {
+      modalOverlay.style.display = 'none';
+    });
+
+    // 모달의 "계정 탈퇴" 버튼 클릭 시 탈퇴 처리 후 모달 닫기
+    modalWithdrawBtn.addEventListener('click', () => {
+      alert('계정 탈퇴 처리!');
+      modalOverlay.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> -->
+
+<div id="commentArea">
+    <!-- 댓글 목록 -->
+    <div class="comment-list-area">
+        <ul id="commentList">
+            <c:forEach var="comment" items="${board.commentList}">
+                <li class="comment-row <c:if test='${comment.parentNo != 0}'>child-comment</c:if>" data-comment-no="${comment.commentNo}">
+                    <p class="comment-writer">
+                        <img src="${empty comment.profileImage ? '/resources/images/user.png' : comment.profileImage}">
+                        <span>${comment.memberNickname}</span>
+                        <span class="comment-date">(${comment.commentCreateDate})</span>
+                    </p>
+
+                    <p class="comment-content">${comment.commentContent}</p>
+
+                    <!-- 버튼 영역 -->
+                    <div class="comment-btn-area">
+                        <c:if test="${not empty loginMember}">
+                            <button onclick="showInsertComment(${comment.commentNo}, this)">답글</button>
+                        </c:if>
+
+                        <c:if test="${loginMember.memberNo == comment.memberNo}">
+                            <button onclick="showUpdateComment(${comment.commentNo}, this)">수정</button>
+                            <button onclick="deleteComment(${comment.commentNo})">삭제</button>
+                        </c:if>
+                    </div>
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+
+    <!-- 댓글 작성 부분 -->
+    <div class="comment-write-area">
+        <textarea id="commentContent"></textarea>
+        <button id="addComment">댓글<br>등록</button>
+    </div>
+</div>

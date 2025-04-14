@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,500&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+
+header {
+    height: 440px;
+    width: 100vw;
+    background: rgb(33, 174, 254);
+    background: linear-gradient(90deg, rgba(33, 174, 254, 1) 30%, rgba(216, 222, 215, 0) 100%), url('../images/header/popStore.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+
+
+/*------------------ header top -----------------*/
+
+#header-top {
+    height: 70px;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(28, 89, 154);
+}
+
+/*  로고 및 로그인 회원가입 버튼 감싸는 요소 */
+#header-top> .wrap {
+    margin: auto;
+    width: 1030px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* header top의 로고 */
+#header-top img {
+    height: 50px;
+    object-fit: contain;
+}
+
+
+/* 로그인, 회원가입 버튼 감싸는 요소 */
+#header-top> .wrap >  .wrap-btn {
+    width: 245px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+
+
+/* 왼쪽 버튼(로그인, 마이페이지) */
+#header-top > .wrap .left-btn {
+    border: 10px solid #094580;
+    background-color: #094580;
+    
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    
+}
+
+/* 오른쪽 버튼(회원가입, 로그아웃) */
+#header-top > .wrap .right-btn {
+    border: 10px solid #37B320;
+    background-color: #37B320;
+
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* ------------------- header middle -------------------- */
+
+
+
+#header-middle {
+    height: 320px;
+    width: 1030px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+/* header-middle의 로고 */
+#header-middle   #logo {
+    width: 300px;
+    height: auto;
+    object-fit: contain;
+    margin-left: 20px;
+}
+
+
+/* search-container */
+/* #header-middle  > .search-container {
+    width: 630px;
+    max-width: 600px;
+    margin: 20px auto 30px auto;
+    position: relative;
+    border-radius: 20px;
+    background-color: #FFDB00;
+    border: 1px solid #EA7700;
+    
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+} */
+
+#header-middle > .search-container {
+    width: 630px;
+    max-width: 600px;
+    margin: 20px auto 30px auto;
+    position: relative;
+    border-radius: 16px;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+#header-middle > .search-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+
+
+/* switch-menu */
+/* #header-middle  >.search-container>#switch-menu{
+    height: 40px;
+    width: 70px;
+    text-align: center;
+
+    border-radius: 20px 0 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFDB00;
+
+    color: #EA7700;
+    font-weight: bold;
+
+    cursor: pointer;
+
+} */
+
+#header-middle > .search-container > #switch-menu {
+    height: 36px;
+    min-width: 70px;
+    padding: 0 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(33, 174, 254, 0.1);
+    color: var(--primary-blue);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 5px;
+}
+
+#header-middle > .search-container > #switch-menu:hover {
+    background-color: rgba(33, 174, 254, 0.15);
+}
+
+
+
+/* search bar */
+/* #header-middle  >.search-container> .search-input {
+    width: 500px;
+    height: 40px;
+    padding: 10px;
+    font-size: 16px;
+    color: gray;
+    border: 2px solid var(--third-blue);
+    테두리 색상 
+    outline: none;
+
+    border-radius: 5px;
+} */
+
+#header-middle > .search-container > .search-input {
+    width: 420px;
+    height: 36px;
+    padding: 8px 12px;
+    font-size: 15px;
+    color: #1a1a1a;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+.search-input::placeholder {
+    /* color: rgba(91, 207, 205, 0.8); */
+    /* color: gray; */
+    color: #666;
+}
+
+
+/* 돋보기 icon */
+/* #header-middle  >.search-container>i {
+    height: 40px;
+    width: 60px;
+    color: #EA7700;
+
+    border-radius: 0 20px 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+} */
+
+#header-middle > .search-container > i {
+    height: 36px;
+    width: 36px;
+    color: var(--primary-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    margin-right: 5px;
+}
+
+
+
+/* -------------------- header-bottom ------------------ */
+
+
+#header-bottom {
+    height: 50px;
+    width: 1030px;
+    margin: auto;
+
+}
+
+/* 메뉴 */
+#header-bottom>nav {
+    width: 700px;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+
+    position: sticky;
+    top: 360px;
+
+    background-color: #0c4175c1;
+    border-radius: 5px;
+
+}
+
+/* 메뉴 버튼 */
+#header-bottom>nav> .menu-item {
+    height: 50px;
+    border-radius: 5px;
+
+    text-decoration: none;
+    color: white;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid transparent;
+    padding: 15px;
+
+/* -------- */
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+#header-bottom>nav> .menu-item:hover {
+
+    color: #21AEFE;
+}
+
+/* --------------- */
+
+#header-bottom > nav > .menu-item::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #21AEFE;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+#header-bottom > nav > .menu-item:hover::after {
+    width: 70%;
+}
+
+/* 아이콘 스타일 */
+#header-bottom > nav > .menu-item svg {
+    width: 16px;
+    height: 16px;
+}

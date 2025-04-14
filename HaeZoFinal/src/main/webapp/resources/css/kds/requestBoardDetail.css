@@ -1,0 +1,163 @@
+body {
+    margin: 0 auto;
+    box-sizing: border-box;
+    width: 1920px;
+    position: relative;
+}
+
+
+/* 게시글 제목 및 작성자 */
+.requestBoardTitle{
+
+    border: none;
+    border-top: 1px solid #60E1CB;
+    border-bottom: 1px solid #60E1CB;
+    height: 124px;
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center ;
+}
+
+.requestBoardTitle>div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4.5em;
+    text-align: center;
+}
+
+
+
+.requestBoardTitle>div:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    font-size: 2em;
+}
+
+.requestBoardTitle>div:nth-child(3){
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    font-size: 1.2em;
+}
+
+.requestBoardMember{
+    border-bottom: 1px solid #60E1CB;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.requestBoardRegion{
+    font-size: 2em;
+}
+
+.requestBoardMember>div>div>div{
+    font-size: 1.4em;
+}
+
+.requestBoardMember>div>div>div:first-child{
+    margin-bottom: 10px;
+}
+
+.requestBoardMember>div{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+
+.requestBoardMember>div>img{
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+
+
+.imageBox{
+    width: 400px;
+    height: 400px;
+    margin: 40px auto;
+}
+
+
+.requestBoardStatement{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 144px;
+    font-size: 1.7em;
+}
+
+.requestBoardSupporter{
+    cursor: pointer;
+}
+
+form{
+    width: 90%;
+    margin: 0 auto 50px auto;
+}
+
+.requestBoardSupporter{
+    margin-right: 600px;
+}
+
+.requestBoardnputDiv{
+    display: flex;
+    flex-direction: column;
+    
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.requestBoardnputDiv>div:nth-of-type(1){
+    font-size: 2em;
+    font-weight: bold;
+    padding: 30px;
+}
+
+.requestBoardnputDiv>div:nth-of-type(2){
+    display: flex;
+    font-size: 1em;
+    margin-left: 30px;
+}
+
+.requestBoardContent{
+    border-top: 1px solid #60E1CB;
+}
+
+
+.requestBoardBtnBox{
+    height: 108px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #60E1CB;
+    border-top: 1px solid #60E1CB;
+    margin-bottom: 100px;
+}
+
+.requestBoardBtnBox button{
+    width: 165px;
+    height: 59px;
+    border-radius: 10px;
+    background-color: #6B98F2;
+    color: #f2f2f2;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.requestBoardBtnBox button:nth-child(1){
+    width: 165px;
+    height: 59px;
+    border-radius: 10px;
+}
+
+.requestBoardProfile, .requestBoardNickname{
+    cursor: pointer;
+}

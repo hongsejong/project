@@ -1,0 +1,478 @@
+/* 카테고리 선택 */
+.categoryP{
+    cursor: pointer;
+}
+
+.checkBoxContent>label{
+    display: none;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 600;
+}
+
+/* 별점 */
+.rating {
+    display: flex;
+    gap: 4px;
+}
+
+.star {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    position: relative;
+    cursor: pointer;
+}
+
+.star::before {
+    content: "★";
+    color: #ccc;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.star::after {
+    content: "★";
+    color: orange;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.star.full::after {
+    width: 100%;
+}
+
+.star.half::after {
+    width: 50%;
+}
+
+/* 마우스 올렸을 때 커지는 효과 */
+.rating label:hover::before {
+    transform: scale(1.1);
+    transition: transform 0.1s ease;
+}
+
+
+
+
+
+/* 모달 */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: flex-start; 
+    padding-top: 100px; 
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+}
+
+.modal {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform: translateY(-50px); 
+    transition: transform 0.3s ease; 
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+.modal-header .close-modal {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.modal-body {
+    margin: 20px 0;
+    font-size: 1rem;
+}
+
+.modal-body input[type="number"] {
+    width: 60px;
+    padding: 5px;
+}
+
+.modal-agree{
+    text-align: center;
+}
+
+.modal-footer {
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* 공통 transition 효과 */
+.modal-footer button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 첫 번째 버튼: 등록, 확인, 적용 등 주요 행동 */
+.modal-footer button:nth-of-type(1) {
+    background-color: rgb(42, 247, 202);  /* 민트 */
+    color: black;
+}
+
+.modal-footer button:nth-of-type(1):hover {
+    background-color: rgb(30, 210, 170);  /* 진한 민트 */
+}
+
+/* 두 번째 버튼: 취소 */
+.modal-footer button:nth-of-type(2) {
+    background-color: #e0e0e0;  /* 연한 회색 */
+    color: #333;
+}
+
+.modal-footer button:nth-of-type(2):hover {
+    background-color: #cfcfcf;  /* 조금 더 진한 회색 */
+}
+
+.toastui-editor-contents img {
+    max-width: 300px !important;
+    height: auto !important;
+}
+
+#modalOverlay4{
+    display: none;
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#modalOverlay4 .modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    position: relative;
+    text-align: center;
+}
+
+#modalOverlay4 .modal-header h2.modal-h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+#modalOverlay4  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+#modalOverlay4 .carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+}
+
+#modalOverlay4 .carousel-arrow {
+    font-size: 2rem;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.carousel-arrow.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+#modalOverlay4 .carousel-container {
+    width: calc(150px * 3 + 20px * 2); /* 카드 3개 + 간격 */
+    max-width: calc(150px * 3 + 20px * 2);
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+#modalOverlay4 .supporter-card {
+    width: 150px !important;
+    flex: 0 0 150px !important;
+    padding: 0.5rem;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px #aaa;
+    margin-top: 10px !important;
+}
+
+
+#modalOverlay4 .carousel-items {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.3s ease;
+}
+
+.supporter-card:last-child {
+    margin-right: 0 !important; /* 마지막 카드가 밖으로 튀는 것 방지 */
+}
+
+#modalOverlay4 .supporter-card:hover {
+    
+    border-color: #4285f4;
+    background-color: #f0f8ff;
+}
+
+#modalOverlay4 .supporter-card.selected {
+    border: 3px solid #4285f4;
+    background-color: #e0f7ff;
+    box-shadow: 0 0 10px rgba(66, 133, 244, 0.8);
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+
+#modalOverlay4 .supporter-card.selected {
+    border-color: #4285f4;
+    background-color: #e3f2fd;
+    box-shadow: 0 0 8px rgba(66,133,244,0.6);
+}
+
+#modalOverlay4  .supporter-img {
+    width: 60px;
+height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#modalOverlay4  .supporter-nickname {
+    margin-top: 0.5rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+#modalOverlay4 .supporter-service {
+    color: gray;
+    font-size: 0.75rem;
+}
+
+#modalOverlay4 .supporter-rating {
+    color: orange;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+/* 
+#modalOverlay4  .select-button {
+    margin-top: 1.5rem;
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+} */
+
+
+/* 선택된 조력자용 모달 조정 */
+#modalOverlay12 .supporter-modal {
+    max-width: 400px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: white;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#modalOverlay12 .modal-body {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+#modalOverlay12 .selected-supporter-card {
+    width: 250px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 10px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#modalOverlay12 .selected-supporter-card .supporter-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+#modalOverlay12 .supporter-nickname {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+#modalOverlay12 .supporter-service {
+    font-size: 0.9rem;
+    color: gray;
+    margin-bottom: 0.5rem;
+}
+
+#modalOverlay12 .supporter-rating {
+    font-size: 1rem;
+    color: orange;
+    font-weight: bold;
+}
+
+#withdrawRequestBtn{
+    width: 200px;
+}
+
+#selectedOneSupporter{
+    cursor: pointer;
+}
+
+#singo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#singo img{
+    width: 35px;
+    height: 35px;
+    margin-left: 5px;
+}
+
+.requestBoardReportChat{
+    display: flex;
+    gap: 20px;
+}
+
+
+
+/* 리뷰 작성창용 모달 조정 *//* 모달 전체 오버레이 */
+#modalOverlay14 .supporter-modal {
+    background: white;
+    padding: 1rem 1.2rem;
+    border-radius: 1rem;
+    width: 450px;
+    max-width: 90%;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+#modalOverlay14 .requestReviewDiv{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+#modalOverlay14 .modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 조력자 카드 */
+#modalOverlay14 .selected-supporter-card {
+    width: 150px;
+    padding: 0.8rem;
+    font-size: 0.85rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+#modalOverlay14 .supporter-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.4rem;
+}
+
+/* 리뷰 영역 */
+.requestReviewWrite {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.review-title {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.requestReviewWrite textarea {
+    width: 100%;
+    height: 100%;
+    font-size: 0.85rem;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+    border-radius: 6px;
+    resize: none;
+    box-sizing: border-box;
+}
+
+
+/* 버튼 */
+
+.select-button {
+    font-size: 0.9rem;
+    padding: 6px 16px;
+    border-radius: 8px;
+    background-color: #6B98F2;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#requestReviewConfirm{
+    margin-top: 30px;
+}
+
+.supporter-detail, .supporter-detail2{
+    cursor: pointer;
+}

@@ -1,0 +1,257 @@
+/* 초기화 */
+* {
+  padding: 50;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #f8f8f8;
+}
+
+/* 모달 오버레이 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none; /* JS로 display: flex 처리 */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* 모달 박스 */
+.login-modal {
+  background-color: #fff;
+  width: 500px; /* 넉넉하게 조정 */
+  padding: 40px 30px;
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 닫기 버튼 */
+.close-modal {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  border: none;
+  background: none;
+  font-size: 26px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #555;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.close-modal:hover {
+  transform: scale(1.2) translateY(-2px);
+  color: #000;
+}
+
+/* 로고 영역 */
+.logo-area {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.logo-area img {
+  width: 100%;
+  max-width: 200px;
+}
+
+/* 입력 박스 */
+.input-box {
+  margin-bottom: 15px;
+}
+.input-box input {
+  width: 100%;
+  height: 45px;
+  border: none;
+  border-radius: 25px;
+  padding: 0 15px;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.input-box input::placeholder {
+  color: #aaa;
+}
+
+/* 로그인 버튼 */
+.login-btn {
+  width: 100%;
+  height: 45px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #fff;
+  background-color: #b2ece1;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.login-btn:hover {
+  background-color: #a2e2d8;
+  transform: translateY(-2px);
+}
+
+/* 아이디 저장 */
+.saveId-area {
+  display: flex;
+  align-items: center; 
+  gap: 5px;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+.saveId-area input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #4caf50; 
+  cursor: pointer;
+}
+.saveId-area label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.saveId-area i {
+  font-size: 0.95rem;
+}
+
+/* 텍스트 링크 */
+.text-area {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 0.9rem;
+}
+.text-area a {
+  color: #333;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+/* 에러 메시지 */
+.error-message {
+  color: red;
+  text-align: center;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+/* SNS 버튼 영역 */
+.sns-buttons {
+  margin-top: 20px;
+}
+.kakao-btn,
+.naver-btn {
+  width: 100%;
+  height: 45px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.kakao-btn {
+  background-color: #fee500;
+  color: #3c1e1e;
+}
+.kakao-btn:hover {
+  background-color: #e4ce00;
+  transform: translateY(-2px);
+}
+.naver-btn {
+  background-color: #03c75a;
+}
+.naver-btn:hover {
+  background-color: #029a4b;
+  transform: translateY(-2px);
+}
+.btn-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* 투명 검정 배경 */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.login-modal {
+  width: 500px;
+  padding: 40px 30px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.close-modal {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  font-weight: bold;
+  color: #666;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.close-modal:hover {
+  transform: scale(1.3) rotate(10deg);
+  color: #222;
+}
+
+/* 나머지 로그인 입력, 버튼, SNS 스타일은 기존 유지 */
+
+.input-box input,
+.login-btn,
+.kakao-btn,
+.naver-btn {
+  border-radius: 25px;
+}

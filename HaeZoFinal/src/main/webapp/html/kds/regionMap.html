@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>토스트 UI 뷰어 테스트</title>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.css"/>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-viewer-all.min.js"></script>
+</head>
+<body>
+    <div id="viewer"></div>
+
+    <script>
+        const viewer = new toastui.Editor.factory({
+            el: document.querySelector('#viewer'),
+            viewer: true,
+            initialValue: "# 테스트\n\n이 텍스트가 정상적으로 보이면 CDN 문제는 아닙니다."
+        });
+    </script>
+</body>
+</html>

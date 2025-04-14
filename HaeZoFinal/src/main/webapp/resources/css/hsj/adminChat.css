@@ -1,0 +1,60 @@
+#admin-chatting-container {
+    display: flex;
+    height: 800px;
+  }
+  
+  .admin-chatting-room-list {
+    width: 30%;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+  }
+  
+  .admin-chatting-box {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .chatting-header {
+    padding: 10px;
+    font-weight: bold;
+    background: #f1f1f1;
+  }
+  
+  .display-chatting {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    list-style: none;
+  }
+  
+  .chatting-input {
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .chatting-input textarea {
+    flex: 1;
+    resize: none;
+  }
+  
+  .chatting-input button {
+    width: 80px;
+  }
+  
+  .read-btn {
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    color: #888;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  
+  .read-btn:hover {
+    color: #000;
+  }
+  

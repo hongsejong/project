@@ -1,0 +1,266 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+/* body */
+#withdrawPointBody{
+    width: 220px;
+    height: 600px;
+    margin: auto;
+}
+/* 제목 */
+#title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+#title > p {
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+/* 금액 선택 컨테이너 (2열 배치) */
+.price-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 왼쪽(1열) | 오른쪽(1열) */
+    gap: 10px;
+    margin-bottom: 15px;
+}
+/* 개별 금액 선택 아이템 */
+.price-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* 숨겨진 라디오 버튼 */
+.price-container input[type="radio"] {
+    display: none;
+}
+/* 라벨을 버튼처럼 스타일링 */
+.price-label {
+    display: inline-block;
+    width: 90px; 
+    height: 40px;
+    line-height: 40px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+/* 선택된 버튼 스타일 */
+.price-container input[type="radio"]:checked + .price-label {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+.price-label:hover {
+    background-color: #e0e0e0;
+}
+/* 수량 입력 및 변경 버튼 컨테이너 */
+.quantity-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+/* 수량 입력 필드 */
+#quantity {
+    width: 50px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+}
+/* 변경 버튼 */
+#updateQuantity {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    transition: 0.3s;
+    font-size: 14px;
+}
+#updateQuantity:hover {
+    background-color: #218838;
+}
+/* 총 결제 금액 표시 */
+#totalAmountDisplay {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+/* 결제하기 버튼 영역 */
+#btnArea {
+    display: flex;
+    justify-content: center;
+}
+/* 결제하기 버튼 */
+#chargeBtn {
+    width: 200px;
+    height: 50px;
+    padding: 10px 15px;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#chargeBtn:hover {
+    background-color: transparent;
+    border: 2px solid #6B98F2;
+    color: black;
+}
+/* 계좌정보 입력 컨테이너 */
+.account-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    text-align: left;
+}
+.account-container label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.account-container input, .account-container select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.account-container select {
+    cursor: pointer;
+}
+.account-container input::placeholder {
+    color: #aaa;
+}
+/****************************************************/
+/* 출금신청 성공/실패 시 화면 */
+.withdrawSuccess .withdrawResult-body,  .withdrawFail .withdrawResult-body{
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f6f8fa;
+    height: 100vh;
+}
+.box_section {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+}
+.check-icon {
+    width: 80px;
+    margin-bottom: 20px;
+}
+h2 {
+    font-size: 24px;
+    color: #333d4b;
+    margin: 0 0 30px;
+}
+.info-grid {
+    margin-top: 20px;
+    text-align: left;
+}
+.info-row {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e8eb;
+}
+.info-row:last-child {
+    border-bottom: none;
+    justify-content: center;
+}
+.label {
+    font-weight: 700;
+    color: #4e5968;
+}
+.value{
+    font-weight: 400;
+    color: #1d2129;
+}
+#withdrawAmount{
+    margin-left: 40px;
+}
+#afterTotalAmount{
+    margin-left: 10px;
+}
+.info-row2 {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e8eb;
+}
+/****************************************************/
+/* 모달 */
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content{
+    width: 600px;
+    /* height: 380px; */
+    margin: auto;
+    border-radius: 10px;
+    /* box-shadow: 3px 3px 3px 3px lightgray; */
+    background-color: #F8F8F8;
+}
+.modal.show{ /* 클래스가 show, modal을 동시에 가진 요소 */
+    display: flex;
+    animation-name: show; /* @keyframes show 적용 */
+    animation-duration: 0.5s; /* 애니메이션 수행 시간 */
+}
+.modal.hide{ /* 클래스가 hide, modal을 동시에 가진 요소 */
+    animation-name: hide; /* @keyframes show 적용 */
+    animation-duration: 0.5s; /* 애니메이션 수행 시간 */
+}
+/* 닫기 버튼 */
+#modal-close {
+    position: absolute;
+    top: 240px;
+    right: 610px;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+#modal-close:hover{
+    transform: scale(1.2);
+}
+/* @keyframes : 
+애니메이션 중간중간의 특정 지점들을 거칠 수 있는 키프레임들을 설정함으로써
+CSS 애니메이션 과정의 중간 절차를 제어할 수 있게 합니다.  */
+@keyframes show {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+@keyframes hide {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="singoMapper">
+
+<resultMap type="Singo" id="singo_rm">
+    <id property="reportNo" column="REPORT_NO"/>
+    <result property="memberNo" column="MEMBER_NO"/>
+    <result property="boardNo" column="BOARD_NO"/>
+    <result property="reportContent" column="REPORT_CONTENT"/>
+    <result property="reportTitle" column="REPORT_TITLE"/>
+    <result property="reportType" column="REPORT_TYPE"/>
+    <result property="reportResult" column="REPORT_RESULT"/>
+    <result property="boardCode" column="BOARD_CODE"/>
+    
+    <!-- 닉네임 필드 -->
+    <result property="reporterNickname" column="REPORTER_NICKNAME"/>
+    <result property="reportedNickname" column="REPORTED_NICKNAME"/>
+</resultMap>
+
+
+
+
+
+
+<select id="getWriteMemberNo" resultType="_int">
+SELECT MEMBER_NO FROM BOARD
+WHERE BOARD_NO =#{boardNo}
+</select>
+
+<insert id="insertReport">
+      <selectKey order="BEFORE" resultType="_int"
+         keyProperty="singoNo">
+         SELECT SEQ_REPORT_NO.NEXTVAL FROM DUAL
+      </selectKey>
+INSERT INTO REPORT VALUES(
+#{singoNo},
+ #{memberNo},
+ #{boardNo},
+ #{singoContent},
+ #{singoTitle},
+ #{type},
+ DEFAULT)
+</insert>
+
+	
+     <insert id="singoFile" parameterType="edu.kh.haezo.board.model.dto.Files"
+      useGeneratedKeys="true">
+
+      <selectKey order="BEFORE" resultType="_int"
+         keyProperty="fileNo">
+         SELECT SEQ_FILE_NO.NEXTVAL FROM DUAL
+      </selectKey>
+       INSERT INTO "FILE" (
+        FILE_NO,
+        BOARD_NO,
+        FILE_PATH,
+        FILE_RENAME,
+        FILE_ORIGINAL,
+        FILE_ORDER
+    )
+    VALUES (
+        #{fileNo},
+        #{boardNo},
+        #{filePath},
+        #{fileRename},
+        #{fileOriginal},
+        #{fileOrder}
+    )
+   </insert>
+   
+   <select id="findMember" resultType="edu.kh.haezo.member.model.dto.Member">
+   
+   SELECT MEMBER_NO,MEMBER_EMAIL,MEMBER_NICKNAME,PROFILE_IMG,MEMBER_BAN,MEMBER_DEL_FL FROM MEMBER
+WHERE MEMBER_NO =(SELECT MEMBER_NO FROM BOARD
+WHERE BOARD_NO=#{boardNo})
+   </select>
+   
+   		<!-- 신고 게시판의 삭제되지 않은 게시글 수 조회 -->
+	<select id="getSingoCount" resultType="_int">
+		SELECT COUNT(*) FROM REPORT 
+	</select>
+
+
+
+	<!-- 신고 목록 조회 -->
+<select id="singoBoardList" resultMap="singo_rm">
+SELECT 
+  R.REPORT_NO,
+  R.MEMBER_NO,
+  R.BOARD_NO,
+  R.REPORT_CONTENT,
+  R.REPORT_TITLE,
+  R.REPORT_TYPE,
+  R.REPORT_RESULT,
+  A.MEMBER_NICKNAME AS REPORTER_NICKNAME,
+  B.MEMBER_NICKNAME AS REPORTED_NICKNAME,
+  BOARD.BOARD_CODE
+FROM REPORT R
+JOIN MEMBER A ON R.MEMBER_NO = A.MEMBER_NO
+JOIN BOARD ON R.BOARD_NO = BOARD.BOARD_NO
+JOIN MEMBER B ON BOARD.MEMBER_NO = B.MEMBER_NO
+ORDER BY R.REPORT_NO DESC
+</select>
+
+<select id="getboardNo" resultType="_int">
+SELECT BOARD_NO FROM REPORT 
+WHERE REPORT_NO =#{reportNo}
+</select>
+	
+	
+<select id="selectBoard" resultMap="singo_rm">
+
+
+SELECT 
+  R.REPORT_NO,
+  R.MEMBER_NO,
+  R.BOARD_NO,
+  R.REPORT_CONTENT,
+  R.REPORT_TITLE,
+  R.REPORT_TYPE,
+  R.REPORT_RESULT,
+  A.MEMBER_NICKNAME AS REPORTER_NICKNAME,
+  B.MEMBER_NICKNAME AS REPORTED_NICKNAME,
+  BOARD.BOARD_CODE
+FROM REPORT R
+JOIN MEMBER A ON R.MEMBER_NO = A.MEMBER_NO
+JOIN BOARD ON R.BOARD_NO = BOARD.BOARD_NO
+JOIN MEMBER B ON BOARD.MEMBER_NO = B.MEMBER_NO
+WHERE BOARD.BOARD_NO =#{boardNo}
+AND R.REPORT_NO =#{reportNo}
+ORDER BY R.REPORT_NO DESC
+</select>
+
+
+   <select id="selectFiles" resultType="edu.kh.haezo.board.model.dto.Files">
+   SELECT * FROM "FILE" 
+WHERE BOARD_NO=#{boardNo}
+AND FILE_ORDER=1
+   
+   </select>
+
+<!-- 신고 무시 -->
+<update id="ignoreReport">
+    UPDATE REPORT
+    SET REPORT_RESULT = 'B'
+    WHERE REPORT_NO = #{reportNo}
+</update>
+
+<!-- 신고글 삭제를 위한 보드넘버 검색 -->
+
+<select id="findBoardNoByReportNo" resultType="_int" parameterType="_int">
+    SELECT BOARD_NO 
+    FROM REPORT
+    WHERE REPORT_NO = #{reportNo}
+</select>
+
+<!-- 신고처리된 글 삭제 -->
+<update id="updateBoardDelFl">
+    UPDATE BOARD
+    SET BOARD_DEL_FL = 'Y'
+    WHERE BOARD_NO = #{boardNo}
+</update>
+
+<!-- 신고 무시 -->
+<update id="deleteReport">
+    UPDATE REPORT
+    SET REPORT_RESULT = 'C'
+    WHERE REPORT_NO = #{reportNo}
+</update>
+
+<select id="findMemberNoByBoardNo" parameterType="int" resultType="int">
+SELECT MEMBER_NO FROM BOARD
+WHERE BOARD_NO =#{boardNo}
+</select>
+
+<select id="selectBan" resultType="edu.kh.haezo.member.model.dto.UserBan" parameterType="int">
+    SELECT *
+    FROM USER_BAN
+    WHERE MEMBER_NO = #{memberNo}
+</select>
+
+<insert id="insertUserBan">
+INSERT INTO USER_BAN 
+VALUES(NULL, NULL, 1, 0,#{memberNo})
+
+</insert>
+
+<update id="banCountUp">
+    UPDATE USER_BAN
+    SET REPORT_COUNT = REPORT_COUNT + 1
+    WHERE MEMBER_NO = #{memberNo}
+</update>
+
+<select id="boardStatusCheck" resultType="_int">
+SELECT COUNT(*) FROM REPORT
+WHERE REPORT_RESULT ='A'
+</select>
+ 
+ <!--  처리 전만 조회 -->
+<select id="singoMapperBoardCheck" resultMap="singo_rm">
+SELECT 
+  R.REPORT_NO,
+  R.MEMBER_NO,
+  R.BOARD_NO,
+  R.REPORT_CONTENT,
+  R.REPORT_TITLE,
+  R.REPORT_TYPE,
+  R.REPORT_RESULT,
+  A.MEMBER_NICKNAME AS REPORTER_NICKNAME,
+  B.MEMBER_NICKNAME AS REPORTED_NICKNAME,
+  BOARD.BOARD_CODE
+FROM REPORT R
+JOIN MEMBER A ON R.MEMBER_NO = A.MEMBER_NO
+JOIN BOARD ON R.BOARD_NO = BOARD.BOARD_NO
+JOIN MEMBER B ON BOARD.MEMBER_NO = B.MEMBER_NO
+WHERE  R.REPORT_RESULT='A'
+ORDER BY R.REPORT_NO DESC
+
+</select>
+
+<!-- 파일 조회후 삭제하기위함 -->
+	<select id="selectSingoFileList" resultType="string">
+    		SELECT FILE_RENAME FROM "FILE"
+    		WHERE FILE_PATH LIKE '/resources/files/singo%'
+	</select>
+	
+	<select id="selectReportCount" resultType="edu.kh.haezo.member.model.dto.UserBan">
+	  SELECT * FROM USER_BAN 
+ 	WHERE REPORT_COUNT >=3
+	</select>
+	
+	<update id="userBan">
+  UPDATE USER_BAN
+  SET BAN_START = CURRENT_DATE,
+      BAN_END = CURRENT_DATE + 3,
+      REPORT_COUNT = 0,
+      BAN_COUNT = #{banCount} + 1
+  WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="memberBan">
+	UPDATE "MEMBER" SET 
+	MEMBER_BAN ='Y'
+	WHERE MEMBER_NO =#{memberNo}
+	</update>
+	
+	<update id="memberOut">
+	UPDATE "MEMBER" SET 
+	MEMBER_DEL_FL ='Y'
+	WHERE MEMBER_NO=#{memberNo}
+	
+	</update>
+	
+	<update id="reportReset">
+	  UPDATE USER_BAN
+  SET BAN_START = CURRENT_DATE,
+      BAN_END = NULL,
+      REPORT_COUNT = 0
+  WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+	<update id="memberRevive">
+	<![CDATA[
+	UPDATE "MEMBER"
+SET MEMBER_BAN = 'N'
+WHERE MEMBER_NO IN (
+    SELECT MEMBER_NO
+    FROM USER_BAN
+    WHERE BAN_END IS NOT NULL
+      AND BAN_COUNT = 1
+      AND BAN_END < CURRENT_DATE
+      )
+      ]]>
+	</update>
+
+</mapper>

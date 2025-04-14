@@ -1,0 +1,471 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* 마이페이지 전체 영역 */
+#myPageProfile{
+    width: 600px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px 3px lightgray;
+    background-color: #F8F8F8;
+}
+/* 마이페이지 헤더 */
+#myPageProfileHead{
+    display: flex;
+    flex-direction: column;
+    height: 180px;
+}
+/* 마이페이지 헤더 상단 */
+#myPageProfileHead-top{
+    position: relative;
+    background-color: #60E1CB;
+    flex-basis: 50%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+/* 마이페이지 헤더 하단 */
+#myPageProfileHead-bottom{
+    flex-basis: 50%;
+    display: flex;
+}
+/* 마이페이지 헤더 하단 좌측 */
+#mph-bot-left{
+    flex-basis: 30%;
+}
+/* 마이페이지 헤더 하단 우측 */
+#mph-bot-right{
+    flex-basis: 70%;
+    display: flex;
+    padding: 10px 0;
+}
+/* 마이페이지 헤더 하단 우측 닉네임(p) */
+#mph-bot-right>p{
+    margin-left: 10px;
+}
+/* 마이페이지 헤더 하단 우측 닉네임(span) */
+#myPageNick{
+    font-size: 25px;
+    font-weight: bold;
+}
+/* 마이페이지: 별점 */
+.profileStars {
+    display: flex;
+    align-items: center;
+}
+.profileStar {
+    width: 15px;
+    height: 15px;
+    background-color: lightGray; /* 빈 별의 색상 */
+    clip-path: polygon(
+        50% 5%,  /* 중앙 상단 */
+        61% 36%, /* 오른쪽 상단 점 */
+        98% 36%, /* 오른쪽 중간 점 */
+        68% 58%, /* 오른쪽 하단 점 */
+        79% 91%, /* 오른쪽 모서리 */
+        50% 75%, /* 중앙 하단 */
+        21% 91%, /* 왼쪽 모서리 */
+        32% 58%, /* 왼쪽 하단 점 */
+        2% 36%,  /* 왼쪽 중간 점 */
+        39% 36%  /* 왼쪽 상단 점 */
+    );
+    margin-right: 4px; /* 별 사이의 간격 */
+}
+.profileStar.full {
+    background-color: gold; /* 채워진 별의 색상 */
+}
+.profileStar.half::before {
+    content: '';
+    position: absolute;
+    width: 7.5px;
+    height: 15px;
+    background-color: gold; /* 절반 채워진 별의 색상 */
+    clip-path: polygon(
+        50% 5%,  /* 중앙 상단 */
+        61% 36%, /* 오른쪽 상단 점 */
+        98% 36%, /* 오른쪽 중간 점 */
+        68% 58%, /* 오른쪽 하단 점 */
+        79% 91%, /* 오른쪽 모서리 */
+        50% 75%, /* 중앙 하단 */
+        21% 91%, /* 왼쪽 모서리 */
+        32% 58%, /* 왼쪽 하단 점 */
+        2% 36%,  /* 왼쪽 중간 점 */
+        39% 36%  /* 왼쪽 상단 점 */
+    );
+}
+#profileStarScore{
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+/* 마이페이지 회원정보 조회 및 수정 버튼 영역 */
+#btnArea{
+    margin-left: 30px;
+}
+/* 마이페이지 헤더 프로필 이미지 */
+#profileImg{
+    background-color: white;
+    object-fit: cover;
+    position: absolute;
+    top: 24px;
+    border: 2px solid #6B98F2;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-left: 10px;
+}
+/* 마이페이지 헤더 프로필 이미지 버튼 영역 */
+#profileImgBtnArea{
+    display: flex;
+    position: absolute;
+    top: 175px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none; /* 클릭 방지 */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto; /* 클릭 가능 */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+/* 마이페이지 헤더 프로필 이미지 삭제 버튼 */
+#deleteProfileImgBtn{
+    border: none;
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+    width: 50px;
+    height: 40px;
+    cursor: pointer;
+}
+#deleteProfileImgBtn:hover{
+    background-color: white;
+    border: 2px solid red;
+    color: black;
+}
+/* 마이페이지 헤더 프로필 선택 */
+#profileImgBtnArea>label{
+    border: none;
+    background-color: lightgray;
+    border-radius: 10px;
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
+    padding: 11px;
+    font-size: 14px;
+}
+/* 마이페이지 헤더 프로필 이미지 변경버튼 */
+#updateProfileImgBtn{
+    border: none;
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+    width: 50px;
+    height: 40px;
+    cursor: pointer;
+}
+#updateProfileImgBtn:hover{
+    background-color: white;
+    border: 2px solid #6B98F2;
+    color: black;
+}
+/* 마이페이지 헤더 프로필 이미지 input 태그  */
+#inputImage{display: none;}
+/**************************************/
+/* 마이페이지 메뉴 전체 */
+#myPageProfileNav{
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+}
+/* 마이페이지 자기소개 영역 */
+.selfProduceArea{
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* 마이페이지 자기소개 내용*/
+.selfProduce-content{
+    margin-left: 10px;
+    padding: 10px;
+    font-size: 15px;
+    white-space: pre-wrap;
+}
+/* 마이페이지 자기소개 수정 버튼 */
+.updateBtnArea{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+.updateBtn2{
+    border: none;
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.updateBtn3{
+    border: none;
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+    width: 80px;
+    height: 40px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+/* 마이페이지 자기소개 작성 영역 */
+.updateSelfIntro{
+    resize: none;
+    width: 450px;
+    height: 75px;
+    margin: 10px 0 10px 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    border-bottom: 2px solid #60E1CB;
+    border-right: 2px solid #60E1CB;
+}
+/* 마이페이지 메뉴 ul */
+#navMenu{
+    display: flex;
+    list-style: none;
+    height: 40px;
+    margin-top: 10px;
+    border-bottom: 1px solid lightgray;
+}
+/* 마이페이지 메뉴 li */
+.contentMenu{
+    flex: 0 1 150px;
+    height: 100%;
+}
+/* 마이페이지 메뉴 li>span */
+.contentMenu>span{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: block;
+    height: 100%;
+    padding-top: 10px;
+    text-align: center;
+    font-size: 15px;
+}
+.contentMenu>span:hover{
+    background-color: #60E1CB;
+    border: 1px solid gray;    
+    border-bottom: 2px solid black;
+    font-weight: bold;
+}
+/***********************************************/
+/* 버튼 영역 */
+#updateBtnArea{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+#updateBtnArea>div:first-child{
+    flex-basis: 80%;
+}
+#updateBtnArea>div:last-child{
+    flex-basis: 20%;
+}
+/* 버튼 */
+.updateBtn{
+    width: 70px;
+    height: 40px;
+    margin: 0 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#cancelBtn{
+    border: 1px solid #6B98F2;
+}
+#infoBtn{
+    border: none;
+    background-color: #6B98F2;
+    color: white;
+}
+/* 마이페이지 메인 */
+#myPageProfileMain{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+}
+/* 회원정보 수정 */
+.updateInfo-row{
+    width: 330px;
+    height: 50px;
+    margin: 20px 0 10px 0;
+    display: flex;
+    align-items: center;
+}
+.updateInfo-row>input{
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border-top: 1px solid #60E1CB;
+    border-bottom: 3px solid #60E1CB;
+    border-right: 3px solid #60E1CB;
+    border-left: 1px solid #60E1CB;
+    box-shadow: 4px 4px 5px #60E1CB;
+}
+#myPageProfileMain>span{
+    font-size: 15px;
+}
+.updateInfo-row span{
+    display: block;
+    align-content: center;
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #60E1CB;
+    box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
+    color: white;
+    text-shadow: 4px 4px 4px rgb(0, 0, 0, 0.5);
+}
+.updateInfo-row button{
+    margin: 0 0 0 10px;
+    border: none;
+    background-color: #6B98F2;
+    color: white;
+}
+/* 비밀번호 변경 */
+#changePw {
+    all: unset; /* 모든 스타일 초기화 */
+    font-size: 13px;
+    height: 50%;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: #FFFFFF;
+    background-color: #6B98F2;
+    cursor: pointer;
+}
+/****************************************************/   
+/* 비밀번호 변경 */
+/* 로고 영역 & 로고 */
+#imgArea{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#imgArea>img{
+    margin-top: 15px;
+}
+/* 비밀번호 확인 전체 영역 */
+#checkPwArea{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/* 비밀번호 확인 개별 영역 */
+.checkPw-row{
+    width: 330px;
+    height: 50px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+}
+/* 비밀번호 확인 input */
+.checkPw-row>input{
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border-top: 1px solid #60E1CB;
+    border-left: 1px solid #60E1CB;
+    border-bottom: 3px solid #60E1CB;
+    border-right: 3px solid #60E1CB;
+    box-shadow: 4px 4px 5px #60E1CB;
+}
+/* 버튼 */
+.checkPw-row>button{
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #6B98F2;
+    box-shadow: 4px 4px 4px rgb(0,0,0,0.6);
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+.checkPw-row>button:hover{
+    background-color: transparent;
+    border: 2px solid #6B98F2;
+    color: #6B98F2;
+    font-weight: bold;
+    font-size: 16px;
+}
+/****************************************************/   
+/* 모달 */
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content{
+    width: 600px;
+    /* height: 380px; */
+    margin: auto;
+    border-radius: 10px;
+    /* box-shadow: 3px 3px 3px 3px lightgray; */
+    background-color: #F8F8F8;
+}
+.modal.show{ /* 클래스가 show, modal을 동시에 가진 요소 */
+    display: flex;
+    animation-name: show; /* @keyframes show 적용 */
+    animation-duration: 0.5s; /* 애니메이션 수행 시간 */
+}
+.modal.hide{ /* 클래스가 hide, modal을 동시에 가진 요소 */
+    animation-name: hide; /* @keyframes show 적용 */
+    animation-duration: 0.5s; /* 애니메이션 수행 시간 */
+}
+/* 닫기 버튼 */
+#modal-close {
+    position: absolute;
+    top: 240px;
+    right: 10px;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+#modal-close:hover{
+    transform: scale(1.2);
+}
+/* @keyframes : 
+애니메이션 중간중간의 특정 지점들을 거칠 수 있는 키프레임들을 설정함으로써
+CSS 애니메이션 과정의 중간 절차를 제어할 수 있게 합니다.  */
+@keyframes show {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+@keyframes hide {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}

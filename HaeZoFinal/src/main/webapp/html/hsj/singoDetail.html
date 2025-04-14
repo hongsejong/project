@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../resources/css/hsj/singoPopup.css">
+</head>
+<body>
+
+    <div id="main-container">
+
+        <div id="singohagi">
+            신고하기
+        </div>
+
+        <div id="img-div">
+            <img src="../../resources/images/user2.gif" alt="" id="profileImg">
+        </div>
+        <div id="user-text">
+            <div>유저일</div>
+            <div>user01</div>
+        </div>
+
+        <div id="singodiv">
+
+            <div id="singo-div">
+                <div class="sinsintext">신고 제목</div>
+                <div id="sintitle">신고 제목입니다.</div>
+                <div class="sinsintext">신고유형</div>
+                    <div>규정을 위반하였습니다.</div>
+            </div>
+        </div>
+
+        <div id="singodiv-b">
+            <div>
+                <div class="sinsintext">신고 내용</div>
+                <div id="singo-textarea">
+                    신고한 내용 불러오기
+                </div>
+            </div>
+        </div>
+
+
+        <div id="singo-div-c">
+            <div class="sinsintext">증빙자료 첨부</div>
+        </div>
+        <div id="file-a">
+            <div id="file-name" class="file-name">등록된 파일 없음</div>
+        </div>
+        <div id="btn-area">
+            <button class="musibtn">신고 무시하기</button>
+            <button class="musibtn">해당 글 삭제하기</button>
+        </div>
+
+
+    </div>
+
+    
+    <script>
+document.getElementById('singo-input').addEventListener('change', function(event) {
+    var fileNameDisplay = document.getElementById('file-name');
+    var files = event.target.files;
+    
+    if (files.length > 0) {
+        var fileNames = Array.from(files).map(file => file.name).join(', ');
+        fileNameDisplay.textContent = fileNames;
+    } else {
+        fileNameDisplay.textContent = "선택된 파일 없음";
+    }
+});
+    </script>
+</body>
+</html>

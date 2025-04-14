@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../resources/css/hsj/singoPopup.css">
+</head>
+<body>
+
+    <div id="main-container">
+<form action="">
+
+
+        <div id="singohagi">
+            신고하기
+        </div>
+
+        <div id="img-div">
+            <img src="../../resources/images/user2.gif" alt="" id="profileImg">
+        </div>
+        <div id="user-text">
+            <div>유저일</div>
+            <div>user01</div>
+        </div>
+
+        <div id="singodiv">
+
+            <div id="singo-div">
+                <div class="sinsintext" >신고 제목</div>
+                
+                <input type="text" id="titleinput">
+                <div class="sinsintext">신고유형</div>
+                <select>
+                    <option value="" id="sede" selected disabled>신고 유형을 선택해주세요.</option>
+                    <option value="">허위 정보를 기재하였습니다.</option>
+                    <option value="">부적절한 사진입니다.</option>
+                    <option value="">부적절한 내용입니다</option>
+                    <option value="">규정을 위반하였습니다.</option>
+                    <option value="">기타</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="singodiv-b">
+            <div>
+                <div class="sinsintext">신고 내용</div>
+                <textarea name="" id="singo-textarea"></textarea>
+            </div>
+        </div>
+
+
+        <div id="singo-div-c">
+            <div class="sinsintext center">증빙자료 첨부</div>
+        </div>
+        <div id="file-a">
+            <input type="file" name="file" id="singo-input" >
+            <label for="singo-input" class="file-label"  >파일 선택</label>
+            <div id="file-name" class="file-name">선택된 파일 없음</div>
+        </div>
+
+        <button id="submitbtn">제출하기</button>
+    </form>
+
+    </div>
+
+    
+    <script>
+document.getElementById('singo-input').addEventListener('change', function(event) {
+    var fileNameDisplay = document.getElementById('file-name');
+    var files = event.target.files;
+    
+    if (files.length > 0) {
+        var fileNames = Array.from(files).map(file => file.name).join(', ');
+        fileNameDisplay.textContent = fileNames;
+    } else {
+        fileNameDisplay.textContent = "선택된 파일 없음";
+    }
+});
+    </script>
+</body>
+</html>

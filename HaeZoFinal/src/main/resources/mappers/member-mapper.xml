@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+
+<resultMap type="Member" id="member_rm">
+
+		<!-- DB의 기본 키(복합키면 여러 개 작성) -->
+		<id property="memberNo" column="MEMBER_NO" />
+
+		<!-- DB의 일반 컬럼들 -->
+		<result property="memberEmail" column="MEMBER_EMAIL" />
+		<result property="memberPw" column="MEMBER_PW" />
+		<result property="memberNickname" column="MEMBER_NICKNAME" />
+		<result property="memberTel" column="MEMBER_TEL" />
+		<result property="memberAddress" column="MEMBER_ADDR" />
+		<result property="profileImg" column="PROFILE_IMG" />
+		<result property="enrollDate" column="ENROLL_DATE" />
+		<result property="memberSelfIntro" column="MEMBER_SELFINTRO" />
+		<result property="memberBan" column="MEMBER_BAN" />
+		<result property="memberDerReason" column="MEMBER_DER_REASON" />
+		<result property="memberDeleteFlag" column="MEMBER_DEL_FL" />
+	</resultMap>
+	
+	<select id="login" parameterType="Member" resultMap="member_rm">
+		SELECT
+		MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_PW,
+		MEMBER_TEL,
+		MEMBER_ADDR, PROFILE_IMG, 
+		TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS ENROLL_DATE,
+		MEMBER_SELFINTRO,
+		MEMBER_BAN,
+		MEMBER_DER_REASON,
+		MEMBER_DEL_FL
+		FROM "MEMBER"
+		WHERE (MEMBER_DEL_FL = 'N' OR MEMBER_DEL_FL = 'H')
+		AND MEMBER_EMAIL = #{memberEmail}
+	</select>
+	
+	
+	<insert id="signUp" parameterType="Member">
+		INSERT INTO "MEMBER"
+		VALUES(SEQ_MEMBER_NO.NEXTVAL
+		, #{memberEmail}
+		, #{memberPw}
+		, #{memberNickname}
+		, #{memberTel}
+		, #{memberAddress}
+		,
+		NULL, DEFAULT, NULL, DEFAULT, NULL,DEFAULT)
+	</insert>
+	
+	<select id="banend" resultType="String">
+	 SELECT BAN_END
+FROM "MEMBER" JOIN USER_BAN USING(MEMBER_NO)
+WHERE MEMBER_NO =#{memberNo}
+	</select>
+	
+	
+	 <select id="selectMemberByEmail" parameterType="string" resultType="Member">
+    SELECT * FROM MEMBER WHERE MEMBER_EMAIL = #{email}
+  </select>
+  
+  <insert id="insertMember" parameterType="Member">
+    INSERT INTO MEMBER (
+         MEMBER_NO,
+         MEMBER_EMAIL,
+         MEMBER_PW,
+         MEMBER_NICKNAME,
+         MEMBER_TEL,
+         MEMBER_ADDR,
+         PROFILE_IMG,
+         ENROLL_DATE,
+         MEMBER_SELFINTRO,
+         MEMBER_BAN,
+         MEMBER_DER_REASON,
+         MEMBER_DEL_FL
+    ) VALUES (
+         SEQ_MEMBER_NO.NEXTVAL,
+         #{memberEmail},
+         #{memberTel},
+         #{memberNickname},
+         
+         CASE 
+            WHEN #{memberTel} LIKE '+82%' THEN 
+                REGEXP_REPLACE(REPLACE(REPLACE(#{memberTel}, '+82', '0'), ' ', ''), '[^0-9]', '')
+            ELSE 
+                REGEXP_REPLACE(#{memberTel}, '[^0-9]', '')
+         END,
+
+         #{memberAddress},
+         #{profileImg},
+         DEFAULT,
+         NULL,
+         DEFAULT,
+         NULL,
+         DEFAULT
+    )
+</insert>
+
+
+
+</mapper>

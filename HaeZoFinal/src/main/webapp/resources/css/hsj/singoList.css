@@ -1,0 +1,284 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header, footer{
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
+    background-color: #F8F8F8;
+    box-sizing: border-box;
+
+}
+
+#main-container {
+    border-radius: 10px; 
+    padding: 20px;
+    background-color: #f9f9f9;
+    width: 1500px;
+    margin: auto;
+    margin-top: 30px;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#search-area {
+    display: flex;
+    align-items: center;
+}
+
+#search-box {
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#search-btn {
+    padding: 5px 10px;
+    background-color: #60e1cb;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+#table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#table th, #table td {
+    border-bottom: 1px solid #d9d9d9;
+    padding: 10px;
+    text-align: center;
+}
+
+#table th {
+    background-color: #f5f5f5;
+}
+
+.tr {
+    height: 50px;
+}
+
+#check-area {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+#page {
+    text-align: right;
+    margin-top: 20px;
+}
+
+#page button {
+    padding: 5px 10px;
+    margin-left: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#add-post {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#add-btn {
+    padding: 10px 20px;
+    background-color: #60e1cb;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+#mytext {
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.edit-btn, .delete-btn {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #60e1cb;
+    color: white;
+    cursor: pointer;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+    background-color: #4cb1a4;
+}
+
+/* 답변 전/답변 완료 상태 색상 추가 */
+.status-pending {
+    color: #f39c12; /* 답변 전  + 처리 전*/ 
+    font-weight: bold;
+}
+
+.status-complete {
+    color: #27ae60; /* 답변 완료  + 취소*/
+    font-weight: bold;
+}
+.status-cancel {
+    color: red; /* 글 삭제*/
+    font-weight: bold;
+}
+
+#btn2-area{
+    text-align: right;
+    margin-top: 30px;
+}
+#btn2-area > button{
+    padding: 5px 10px;
+    margin: 0 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #60e1cb;
+    color: white;
+    cursor: pointer;
+
+}
+
+
+
+
+/* 페이지네이션 영역 */
+.pagination-area {
+    display: flex;
+    justify-content: center; /* 가운데 정렬 */
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* 페이지네이션 기본 스타일 */
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 개별 페이지 버튼 */
+.pagination li {
+    margin: 0 5px;
+}
+
+/* 페이지네이션 링크 */
+.pagination a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #60e1cb;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+    border: 2px solid transparent;
+}
+
+/* 페이지네이션 버튼 hover 효과 */
+.pagination a:hover {
+    background-color: #60e1cb;
+    color: white;
+    border-color: #60e1cb;
+    transform: scale(1.1);
+}
+
+/* 현재 페이지 스타일 */
+.pagination .current {
+    background-color: #60e1cb;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    border: 2px solid #60e1cb;
+    padding: 5px 5px;
+    pointer-events: none; /* 클릭 방지 */
+}
+
+/* 처음, 이전, 다음, 마지막 버튼 스타일 */
+.pagination li:first-child a, 
+.pagination li:last-child a, 
+.pagination li:nth-child(2) a, 
+.pagination li:nth-last-child(2) a {
+    font-size: 16px;
+    font-weight: bold;
+    background: #f8f9fa;
+    color: #60e1cb;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+}
+
+/* 처음, 이전, 다음, 마지막 버튼 hover 효과 */
+.pagination li:first-child a:hover, 
+.pagination li:last-child a:hover, 
+.pagination li:nth-child(2) a:hover, 
+.pagination li:nth-last-child(2) a:hover {
+    background-color: #60e1cb;
+    color: white;
+    transform: scale(1.2);
+}
+
+/* 비활성화된 버튼 (첫 페이지, 마지막 페이지에서) */
+.pagination .disabled a {
+    color: #ced4da;
+    pointer-events: none;
+    background: transparent;
+    border: none;
+}
+
+
+/* 헤더 쪽 텍스트 a태그는 기본 스타일 유지 */
+#mytext a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* 테이블 내 제목 링크 전용 스타일 */
+  #table a {
+    text-decoration: none;
+  }
+  
+  #table a:link {
+    color: black;
+    transition: all 0.3s ease;
+  }
+  
+  #table a:visited {
+    color: #a3a3a3;
+    font-weight: normal;
+  }
+  
+  #table a:hover {
+    color: #4cb1a4;
+    text-decoration: underline;
+    transform: scale(1.02);
+  }
+  

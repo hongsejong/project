@@ -1,0 +1,400 @@
+/* 전체 페이지 초기 설정 */
+body {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* 메인 컨테이너 */
+#main-container {
+    display: flex;
+    margin-top: 50px;
+
+}
+/* 아래 배경색칠하기 */
+#btm{
+    height: 200px;
+    background-color: #f9f9f9;
+}
+
+/* 왼쪽 패널 */
+#left {
+    flex-direction: column;
+    width: 20%;
+    text-align: center;
+}
+
+/* 오른쪽 패널 */
+#right {
+    background-color: #f9f9f9;
+    width: 70%;
+    border-top-left-radius: 50px;
+    margin-bottom: -100px;
+
+
+}
+
+/* 관리자 페이지 텍스트 박스 */
+#adp-text {
+    display: flex;
+    width: 245px;
+    height: 70px;
+    background-color: rgba(145, 242, 233, 0.5);
+    border: none;
+    border-radius: 18px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 70px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* 왼쪽 메뉴 */
+.adcontent {
+    display: flex;
+    width: 345px;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/* 아이콘 앞에 FontAwesome 적용 (분석, 시계보기, 오늘의할일, 설정) */
+/* #left > div:nth-child(2)::before {
+    font-family: "Font Awesome 6 Free";  
+    font-weight: 900; 
+    content: "\f002"; 
+    display: inline-block;
+    margin-right: 8px;
+}
+#left > div:nth-child(3)::before {
+    font-family: "Font Awesome 6 Free";  
+    font-weight: 900; 
+    content: "\f017"; 
+    display: inline-block;
+    margin-right: 8px;
+}
+#left > div:nth-child(5)::before {
+    font-family: "Font Awesome 6 Free"; 
+    font-weight: 900; 
+    content: "\f073"; 
+    display: inline-block;
+    margin-right: 8px;
+}
+#left > div:nth-child(4)::before {
+    font-family: "Font Awesome 6 Free"; 
+    font-weight: 900; 
+    content: "\f0f3"; 
+    display: inline-block;
+    margin-right: 8px;
+}
+#left > div:nth-child(7)::before {
+    font-family: "Font Awesome 6 Free";  
+    font-weight: 900; 
+    content: "\f013";
+    display: inline-block;
+    margin-right: 8px;
+}
+#left > div:nth-child(6)::before {
+    font-family: "Font Awesome 6 Free";  
+    font-weight: 900; 
+    content: "\f075";
+    display: inline-block;
+    margin-right: 8px;
+} 
+이모지가 나을거같음    
+*/
+
+/* 상단 Today 영역 */
+#first {
+    margin-left: 60px;
+}
+#secend {
+    display: flex;
+    margin-top: 30px;
+    margin-left: 30px;
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+}
+#today {
+    display: flex;
+    width: 350px;
+    height: 200px;
+    background-color: white;
+    border-radius: 34px;
+    align-items: center;
+}
+#today-text {
+    width: 300px;
+    font-weight: bold;
+    font-size: 20px;
+}
+#today-count {
+    font-size: 65px;
+    text-align: center;
+}
+#img-box {
+    margin-top: 20px;
+    border-radius: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: rgba(145, 242, 233, 0.6);
+    margin-right: 30px;
+}
+#today-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    color: red;
+    font-size: 20px;
+}
+
+/* 게시판 컨테이너 (공지, 새소식, 신고, 문의) */
+.board-container {
+    display: flex;
+    justify-content: space-around;
+    width: 1300px;
+    margin-top: 30px;
+}
+
+/* 공지사항, 새소식 박스 스타일 */
+.notice-in, .news-in {
+    width: 600px;
+    height: 200px;
+    background-color: white;
+    border: 3px solid #60E1CB;
+    border-radius: 10px;
+}
+
+/* 공지사항 제목 영역 */
+.notice-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: bold;
+}
+/* 새소식 제목 영역 */
+.news-text {
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 13px;
+    justify-content: space-between;
+}
+
+/* 공지, 새소식, 신고, 문의 아이콘 */
+.notice-icon {
+    font-weight: bold;
+    background-color: #FFD400;
+    display: inline-block;
+    margin: 20px 10px 0px 20px;
+    width: 50px;
+    height: 25px;
+    font: 10px;
+    text-align: center;
+    border-radius: 3px;
+}
+.news-icon {
+    font-weight: bold;
+    background-color: black;
+    color: #FFD400;
+    display: inline-block;
+    margin: 20px 10px 0px 20px;
+    width: 50px;
+    height: 25px;
+    font: 10px;
+    text-align: center;
+    border-radius: 3px;
+}
+.singo-icon {
+    font-weight: bold;
+    background-color: red;
+    color: black;
+    display: inline-block;
+    margin: 20px 10px 0px 20px;
+    width: 50px;
+    height: 25px;
+    font: 10px;
+    text-align: center;
+    border-radius: 3px;
+}
+.inq-icon {
+    font-weight: bold;
+    background-color: #91F2E9;
+    color: black;
+    display: inline-block;
+    margin: 20px 10px 0px 20px;
+    width: 50px;
+    height: 25px;
+    font: 10px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+/* 날짜 */
+.notice-date {
+    flex-shrink: 0;
+    min-width: 80px;
+    text-align: right;
+    color: #9A98BA;
+    white-space: nowrap;
+    margin-left: auto; /* 오른쪽 끝 정렬 */
+}
+.news-date {
+    flex-shrink: 0;
+    min-width: 80px;
+    text-align: right;
+    color: #9A98BA;
+    white-space: nowrap;
+    margin-left: auto; /* 오른쪽 끝 정렬 */
+}
+
+/* 공지/새소식 각각 한 줄(행) 구성 */
+.notice-row, .news-row {
+    display: flex;
+    align-items: center;
+    margin: 0 0 15 10;
+    padding-right: 10px;
+}
+
+/* 공지/새소식 제목 (길면 말줄임 처리) */
+.notice-title, .news-title {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+/* 기타 공통 스타일 */
+#main-container {
+    margin-top: 50px;
+}
+a {
+    text-decoration: none;
+}
+
+/* 검색 박스 */
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 2px solid #60E1CB;
+    border-radius: 25px;
+    padding: 5px 10px;
+    width: 300px;
+    background-color: #f8f8f8;
+}
+.search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+}
+.search-box button {
+    background: #60E1CB;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.search-box button img {
+    width: 60%;
+    height: 60%;
+}
+
+/* 상단 텍스트 */
+#top-text {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.all-text{
+    color: black;
+}
+
+  
+#adp-text{
+    cursor: pointer;
+}
+
+
+#chartContainer {
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border-radius: 10px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e4eb;
+    padding: 15px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+#chartContainer:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+}
+
+
+
+#chartContainer {
+    width: 1000px;
+    height: 600px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+#chartContainer:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+/* 드래그 정렬용 래퍼 (2열 배치) */
+#sortable-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* 각 박스 크기와 정렬 */
+.sortable-box {
+    width: 45%;
+    min-width: 600px;
+    background-color: transparent;
+}
+
+/* 드래그 중인 placeholder 스타일 */
+.sortable-placeholder {
+    width: 45%;
+    height: 300px;
+    background: rgba(96, 225, 203, 0.2);
+    border: 2px dashed #60E1CB;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+
+#btsize{
+    height: 200px;
+}

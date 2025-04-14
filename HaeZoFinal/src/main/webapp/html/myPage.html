@@ -1,0 +1,92 @@
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myPage</title>
+    <link rel="stylesheet" href="../resources/css/myPage/myPage-style.css">
+</head>
+<body>
+    <section id="myPageProfile">
+        <div id="myPageProfileHead">
+            <div id="myPageProfileHead-top"></div>
+            <div id="myPageProfileHead-bottom">
+                <div id="mph-bot-left">
+                    <div></div>
+                </div>
+                <div id="mph-bot-right">
+                    <div>
+                        <p><span id="myPageNick">홍길동123123</span></p>
+                        <i id="profileStar">⭐</i>
+                        <i id="profileStar">⭐</i>
+                        <i id="profileStar">⭐</i>
+                        <i id="profileStar">⭐</i>
+                        <i id="profileStar">⭐</i>
+                        <span id="profileStarScore">5.0</span>
+                    </div>
+                    <div id="btnArea">
+                        <button id="updateBtn">회원정보 조회 및 수정</button>
+                    </div>
+                </div>
+            </div>
+            <img src="../resources/images/kds/Tools.png" id="profileImg">
+        </div>
+        <div id="myPageProfileNav">
+            <div class="selfProduceArea">
+                <p class="selfProduce-content">안녕하세요, 분실물 탐정입니다. 잘 부탁드려요.안녕하세요, 분실물 탐정입니다. 잘 부탁드려요.안녕하세요, 분실물 탐정입니다. 잘 부탁드려요.안녕하세요, 분실물 탐정입니다. 잘 부탁드려요. 안녕하세요.</p>
+                <div><button class="updateBtn2" onclick="showUpdateIntro(this)">자기소개 작성</button></div>           
+            </div>
+            <ul id="navMenu">
+                <li class="contentMenu"><span>작성한 게시글</span></li>
+                <li class="contentMenu"><span>요청한 의뢰</span></li>
+                <li class="contentMenu"><span>처리한 의뢰</span></li>
+                <li class="contentMenu"><span>좋아요 게시글</span></li>
+            </ul>
+        </div>
+        <div id="myPageProfileMain">
+            <div>
+                <p id="mainTitle">작성한 게시글<span>(개수)</span></p>
+                <div></div>
+            </div>
+            <div class="mainContent">
+                <div class="mainContent-top">
+                    <div>
+                        <p class="mainC-Title">게시글 제목</p>
+                        <p class="mainC-Content">
+                            게시글 내용입니다.게시글 내용입니다.게시글 내용입니다.
+                            게시글 내용입니다.게시글 내용입니다.게시글 내용입니다.
+                            게시글 내용입니다.게시글 내용입니다.게시글 내용입니다.
+                            게시글 내용입니다.게시글 내용입니다.게시글 내용입니다.
+                            게시글 내용입니다.게시글 내용입니다.게시글 내용입니다.
+                            게시글 내용입니다.게시글 내용입니다.게시글 내용입니다.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="../resources/images/Logo.WebP" class="contentImg">
+                    </div>
+                </div>
+                <div class="mainContent-bottom">
+                    <div class="request-condition">
+                        <p>서비스<span>카테고리 아이디 불러옴</span></p>
+                        <p>장소<span>서울시 강남구</span></p>
+                        <p>가격<span>50,000원</span></p>
+                        <p>기한<span>2025-02-29 까지</span></p>
+                    </div>
+                    <div class="request-supporter">
+                        <span>닉네임</span>
+                        <div>
+                            <img src="../resources/images/kds/Design.png"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- js 연결 -->
+    <script src="../resources/js/myPage.js"></script>
+</body>
+</html>

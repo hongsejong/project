@@ -1,0 +1,607 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/* 마이페이지 전체 영역 */
+#myPageProfile{
+    width: 600px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px 3px lightgray;
+    background-color: #F8F8F8;
+    margin: 0 auto;
+}
+::-webkit-scrollbar{
+    display: none;
+}
+/* 마이페이지 헤더 */
+#myPageProfileHead{
+    display: flex;
+    flex-direction: column;
+    height: 180px;
+}
+/* 마이페이지 헤더 상단 */
+#myPageProfileHead-top{
+    position: relative;
+    background-color: #60E1CB;
+    flex-basis: 50%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#myPageProfileHead-top>img {
+    transition: transform 0.3s ease-in-out; /* 부드러운 회전 효과 */
+    cursor: pointer;
+}
+
+#myPageProfileHead-top>img:hover {
+    transform: rotate(360deg); /* 이미지가 10도 회전 */
+}
+
+/* 마이페이지 헤더 하단 */
+#myPageProfileHead-bottom{
+    flex-basis: 50%;
+    display: flex;
+}
+/* 마이페이지 헤더 하단 좌측 */
+#mph-bot-left{
+    flex-basis: 30%;
+}
+/* 마이페이지 헤더 하단 우측 */
+#mph-bot-right{
+    flex-basis: 70%;
+    display: flex;
+    padding: 10px 0;
+}
+/* 마이페이지 헤더 하단 우측 닉네임(p) */
+#mph-bot-right>p{
+    margin-left: 10px;
+}
+/* 마이페이지 헤더 하단 우측 닉네임(span) */
+#myPageNick{
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 25px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ff6a00, #ee0979, #00c9ff, #92fe9d);
+    background-size: 400% 400%;
+    animation: gradientMove 10s ease infinite;
+}
+/* 애니메이션 정의 */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+/* 마이페이지: 별점 */
+.profileStars {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+/* 반짝이는 애니메이션 정의 */
+@keyframes sparkle {
+    0% {
+        box-shadow: 0 0 5px gold, 0 0 10px gold, 0 0 15px gold; /* 기본 상태 */
+        transform: scale(1); /* 원래 크기 */
+    }
+    50% {
+        box-shadow: 0 0 10px gold, 0 0 15px gold, 0 0 20px gold; /* 반짝이는 상태 */
+        transform: scale(1.5); /* 약간 커지도록 */
+    }
+    100% {
+        box-shadow: 0 0 5px gold, 0 0 10px gold, 0 0 15px gold; /* 원래 상태로 돌아옴 */
+        transform: scale(1); /* 원래 크기 */
+    }
+}
+.profileStar {
+    width: 20px;
+    height: 20px;
+    background-color: lightGray; /* 빈 별의 색상 */
+    clip-path: polygon(
+        50% 5%,  /* 중앙 상단 */
+        61% 36%, /* 오른쪽 상단 점 */
+        98% 36%, /* 오른쪽 중간 점 */
+        68% 58%, /* 오른쪽 하단 점 */
+        79% 91%, /* 오른쪽 모서리 */
+        50% 75%, /* 중앙 하단 */
+        21% 91%, /* 왼쪽 모서리 */
+        32% 58%, /* 왼쪽 하단 점 */
+        2% 36%,  /* 왼쪽 중간 점 */
+        39% 36%  /* 왼쪽 상단 점 */
+    );
+    margin-right: 4px; /* 별 사이의 간격 */
+    transition: opacity 0.3s ease-in-out; /* 애니메이션 효과 */
+}
+.profileStar.full {
+    background-color: gold; /* 채워진 별의 색상 */
+    animation: sparkle 1.5s infinite; /* 반짝이는 애니메이션 적용 */
+}
+.profileStar.half::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 20px;
+    background-color: gold; /* 절반 채워진 별의 색상 */
+    clip-path: polygon(
+        50% 5%,  /* 중앙 상단 */
+        61% 36%, /* 오른쪽 상단 점 */
+        98% 36%, /* 오른쪽 중간 점 */
+        68% 58%, /* 오른쪽 하단 점 */
+        79% 91%, /* 오른쪽 모서리 */
+        50% 75%, /* 중앙 하단 */
+        21% 91%, /* 왼쪽 모서리 */
+        32% 58%, /* 왼쪽 하단 점 */
+        2% 36%,  /* 왼쪽 중간 점 */
+        39% 36%  /* 왼쪽 상단 점 */
+    );
+}
+/* 채워지지 않은 별도 보여주기 */
+.profileStar.empty {
+    background-color: lightGray; /* 채워지지 않은 별의 색상 */
+}
+#profileStarScore{
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+/* 마이페이지 회원정보 조회 및 수정 버튼 영역 */
+#btnArea{
+    margin-left: 30px;
+}
+/* 마이페이지 회원정보 조회 및 수정 버튼 */
+#updateBtn{
+    border: none;
+    margin-top: 10px;
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+
+    transition: all 0.3s ease; /* 전환 효과 추가 */
+}
+#updateBtn:hover{
+    background-color: white;
+    border: 2px solid #6B98F2;
+    color: #6B98F2;
+    font-weight: bold;
+
+    transform: scale(1.05); /* 크기 증가 */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2); /* 그림자 추가 */
+}
+/* 마이페이지 헤더 프로필 이미지 */
+#profileImg{
+    background-color: white;
+    object-fit: cover;
+    position: absolute;
+    top: 24px;
+    border: 2px solid #6B98F2;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-left: 10px;
+}
+/* 마이페이지 헤더 프로필 이미지 버튼 영역 */
+#profileImgBtnArea{
+    display: flex;
+    position: absolute;
+    top: 175px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none; /* 클릭 방지 */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto; /* 클릭 가능 */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+/* 마이페이지 헤더 프로필 이미지 삭제 버튼 */
+#deleteProfileImgBtn{
+    border: none;
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+    width: 50px;
+    height: 40px;
+    cursor: pointer;
+
+    transition: all 0.3s ease; /* 전환 효과 추가 */
+}
+#deleteProfileImgBtn:hover{
+    background-color: white;
+    border: 2px solid red;
+    color: black;
+
+    transform: scale(1.1); /* 크기 증가 */
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* 그림자 추가 */
+}
+/* 마이페이지 헤더 프로필 선택 */
+#profileImgBtnArea>label{
+    border: none;
+    background-color: lightgray;
+    border-radius: 10px;
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
+    padding: 11px;
+    font-size: 14px;
+}
+/* 마이페이지 헤더 프로필 이미지 변경버튼 */
+#updateProfileImgBtn{
+    border: none;
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+    width: 50px;
+    height: 40px;
+    cursor: pointer;
+
+    transition: all 0.3s ease; /* 전환 효과 추가 */
+}
+#updateProfileImgBtn:hover{
+    background-color: white;
+    border: 2px solid #6B98F2;
+    color: black;
+
+    transform: scale(1.05); /* 크기 증가 */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2); /* 그림자 추가 */
+}
+/* 마이페이지 헤더 프로필 이미지 input 태그  */
+#inputImage{display: none;}
+/**************************************/
+/* 마이페이지 메뉴 전체 */
+#myPageProfileNav{
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+}
+/* 마이페이지 자기소개 영역 */
+.selfProduceArea{
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* 마이페이지 자기소개 내용*/
+.selfProduce-content{
+    margin-left: 10px;
+    padding: 10px;
+    font-size: 15px;
+    white-space: pre-wrap;
+    transition: all 0.3s ease;  /* 부드러운 전환 효과 */
+}
+.selfProduce-content:hover {
+    background-color: #f0f0f0;  /* 배경색 변경 */
+    color: #0992ec;  /* 글자 색 변경 */
+    cursor: pointer;  /* 마우스 커서 변경 */
+    font-size: 16px;  /* 글자 크기 약간 증가 */
+    border-radius: 5px;  /* 모서리 둥글게 처리 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+/* 마이페이지 자기소개 수정 버튼 */
+.updateBtnArea{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+.updateBtn2{
+    border: none;
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+    margin-right: 10px;
+    cursor: pointer;
+
+    transition: all 0.3s ease; /* 전환 효과 추가 */
+}
+.updateBtn2:hover{
+    background-color: white;
+    border: 2px solid #6B98F2;
+    color: #6B98F2;
+    font-weight: bold;
+    transform: scale(1.05); /* 크기 증가 */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2); /* 그림자 추가 */
+}
+.updateBtn3{
+    border: none;
+    background-color: #6B98F2;
+    color: white;
+    border-radius: 10px;
+    width: 80px;
+    height: 40px;
+    margin-right: 5px;
+    cursor: pointer;
+
+    transition: all 0.3s ease; /* 전환 효과 추가 */
+}
+.updateBtn3:hover{
+    background-color: white;
+    border: 2px solid #6B98F2;
+    color: #6B98F2;
+    font-weight: bold;
+    transform: scale(1.05); /* 크기 증가 */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2); /* 그림자 추가 */
+}
+/* 마이페이지 자기소개 작성 영역 */
+.updateSelfIntro{
+    resize: none;
+    width: 450px;
+    height: 75px;
+    margin: 10px 0 10px 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    border-bottom: 2px solid #60E1CB;
+    border-right: 2px solid #60E1CB;
+}
+/* 마이페이지 메뉴 ul */
+#navMenu{
+    display: flex;
+    list-style: none;
+    height: 40px;
+    margin-top: 10px;
+    border-bottom: 1px solid lightgray;
+}
+/* 마이페이지 메뉴 li */
+.contentMenu{
+    flex: 0 1 150px;
+    height: 100%;
+    cursor: pointer;
+}
+/* 마이페이지 메뉴 li>span */
+.contentMenu>span{
+    border-radius: 10px;
+    display: block;
+    height: 100%;
+    padding-top: 10px;
+    text-align: center;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+.contentMenu>span:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(96, 225, 203, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1);
+    background-color: #60E1CB;
+    font-weight: bold;
+}
+/***********************************************/
+/* 마이페이지 메인 */
+#myPageProfileMain{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+#myPageProfileMain>div:first-child{
+    display: flex;
+    align-items: center;
+}
+#myPageProfileMain>div:first-child>div{
+    border-bottom: 1px solid lightgray;
+    padding: 0 210px;
+}
+/* 마이페이지 메인 타이틀 */
+.mainTitle{
+    margin-left: 10px;
+    font-size: 15px;
+    padding: 10px;
+}
+/* 게시글 개별 항목 */
+.mainContent{
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin: 0 10px 15px 10px;
+    overflow: hidden;
+}
+.mainContent:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(96, 225, 203, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-color: #60E1CB;
+}
+/* 게시글 개별 항목 상단 */
+.mainContent-top{
+    display: flex;
+    height: 150px;
+}
+.mainContent-top>div:first-child{
+    flex-basis: 70%;
+    border-bottom: 1px solid lightgray;
+}
+.mainContent-top>div:last-child{
+    flex-basis: 30%;
+}
+/* 게시글 개별 항목:제목 */
+.mainC-Title{
+    width: 450px;
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+    /* 말줄임표 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* 게시글 개별 항목:내용 */
+.toastui-editor-contents::-webkit-scrollbar {
+    display: block; /* 스크롤바를 표시 */
+}
+.toastui-editor-contents{
+    max-height: 92px !important;
+    width: 450px !important;
+    padding: 10px 10px 0 10px !important;
+    overflow-y: scroll !important;
+    img{
+        width: 48px;
+        height: 48px;
+    }
+}
+.toastui-editor-contents::-webkit-scrollbar{
+    width: 8px;
+    background-color: transparent;
+}
+.toastui-editor-contents::-webkit-scrollbar-thumb{
+    background-color: #60E1CB;
+    border-radius: 4px;
+}
+.toastui-editor-contents::-webkit-scrollbar-track{
+    background-color: transparent;
+}
+/* 게시글 개별 항목: 이미지 */
+.contentImg{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+/* 게시글 개별 항목 하단 */
+.mainContent-bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* 조회수/댓글수 아이콘 영역 */
+.icon-area{
+    margin-left: 10px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+}
+/* 조회수/댓글수 아이콘 이미지 */
+.icon-area>span{
+    margin: 0 10px;
+}
+/* 닉네임 영역 */
+.content-writer{
+    margin-right: 10px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+}
+.content-writer>span{
+    margin: 0 10px;
+}
+.content-writer>img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+/* 게시글 작성이 안 되어 있을 경우 */
+.notWrite{
+    margin-left: 95px;
+    color: #6B98F2;
+    font-size: 15px;
+    font-weight: bold;
+}
+/* 의뢰 게시글 목록 조회 테이블 */
+.request-condition{
+    padding: 10px;
+    flex-basis: 80%;
+}
+.request-condition>p{
+    margin-bottom: 10px;
+    display: flex;
+    font-weight: bold;
+}
+.request-condition>p:nth-child(1)>span{
+    margin-left: 10px;
+    font-weight: normal;
+}
+.request-condition>p:nth-child(5)>div{
+    margin-left: 25px;
+}
+.request-condition>p:nth-child(5)>span{
+    margin-left: 10px;
+}
+.request-condition span{
+    margin-left: 25px;
+    font-weight: normal;
+}
+.request-supporter{
+    flex-basis: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+.request-supporter>span{
+    margin-bottom: 5px;
+}
+.request-supporter img{
+    width: 90px;
+    height: 90px;
+}
+
+#speechBubble {
+    position: absolute;
+    top: 10px; /* 상단으로부터의 거리 */
+    right: 10px; /* 오른쪽으로부터의 거리 */
+    background-color: #0992ec;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none; /* 기본적으로 숨김 처리 */
+    font-size: 16px;
+    transition: all 0.5s ease-out; /* 애니메이션 부드럽게 진행 */
+    transform: translateY(-10px); /* 말풍선이 위로 올라오는 효과 */
+    opacity: 0; /* 처음에 말풍선은 투명하게 */
+}
+/* 말풍선의 뾰족한 부분을 만들기 위한 pseudo-element */
+#speechBubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;  /* 말풍선 아래로 이동 */
+    left: 5px;     /* 말풍선 왼쪽 위치 */
+    border-left: 10px solid transparent;  /* 왼쪽 삼각형 모양 */
+    border-right: 10px solid transparent; /* 오른쪽 삼각형 모양 */
+    border-top: 10px solid #0992ec;  /* 위쪽 삼각형 모양 - 말풍선 색 */
+    transform: skewX(-50deg); /* 좌측으로 휘게 만드는 변형 */
+}
+/* 'visible' 클래스가 추가되면 애니메이션 효과를 통해 보이게 됨 */
+#speechBubble.visible {
+    display: block; /* 'visible' 클래스가 있으면 보이게 함 */
+    transform: translateY(0); /* 위에서 아래로 내려오는 효과 */
+    opacity: 1; /* 말풍선의 투명도를 1로 설정 */
+}
+/* 말풍선이 화면에 나타날 때 애니메이션 효과 추가 */
+@keyframes bubbleAnimation {
+    0% {
+        transform: scale(0) rotate(20deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) rotate(-10deg); /* 커졌다가 작아짐 */
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1) rotate(0deg); /* 원래 크기로 돌아옴 */
+        opacity: 1;
+    }
+}
+/* 애니메이션이 적용된 말풍선 */
+#speechBubble.visible {
+    animation: bubbleAnimation 0.5s ease-out;
+}

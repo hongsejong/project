@@ -1,0 +1,98 @@
+body{
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0;
+  min-height: 100vh;
+  position: relative;
+  background-color: #F8F8F8;
+  box-sizing: border-box;
+}
+#top{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 2px solid #f8f8f8;
+    border-radius: 10px;
+    padding: 5px 10px;
+    width: 300px;
+  }
+  
+  .search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  .search-box button {
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .search-box button img {
+    width: 60%;
+    height: 60%;
+  }
+
+  #mid-left{
+    width: 65%;
+    background-color: red;
+  }
+  #mid-right{
+    width: 35%;
+    background-color: yellow;
+    text-align: center;
+  }
+
+  #mid-left-content pre { /* 글 오른쪽 침범 방지*/
+    white-space: pre-wrap; /*자동 줄바꿈*/
+    word-wrap: break-word; /* 단어 단위 줄바꿈 */
+    overflow: auto; /* 내용이 넘칠 경우 스크롤 */
+}
+#midcon{
+    display: flex;
+}
+.btn3{
+  background-color: #6B98F2;
+  color: white;
+  border: 1px solid #f2f2f2;
+  width: 100px;
+  height: 45px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+
+#btn-area > button{
+    background-color: #6B98F2;
+    color: white;
+    border: 1px solid #f2f2f2;
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#a-area{
+    text-align: left;
+}
+#a-area > div >a{
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+a{
+  text-decoration-line: none;
+}

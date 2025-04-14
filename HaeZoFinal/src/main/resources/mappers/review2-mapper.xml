@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reviewMapper2">
+
+  <!-- resultMap: Review2 DTO에 매핑 (클라이언트 정보, 헬퍼 id 포함) -->
+  <resultMap id="completeReviewList_rm" type="Review2">
+      <id property="boardNo" column="BOARD_NO" />
+      <result property="boardTitle" column="BOARD_TITLE" />
+      <result property="boardContent" column="BOARD_CONTENT" />
+      <result property="boardCreateDate" column="B_CREATE_DATE" />
+      <result property="requestPrice" column="REQUEST_PRICE" />
+      <result property="reviewContent" column="REVIEW_CONTENT" />
+      <result property="reviewRating" column="REVIEW_RATING" />
+      <!-- 작성자(의뢰인) 정보 -->
+      <result property="clientProfile" column="CLIENT_PROFILE" />
+      <result property="clientNick" column="CLIENT_NICK" />
+      <!-- 카테고리 -->
+      <result property="categoryName" column="CATEGORY_NAME" />
+      <!-- 조력자(헬퍼) id -->
+      <result property="helperId" column="HELPER_ID" />
+      <result property="helperNick" column="HELPER_NICK" />
+  </resultMap>
+
+	
+	
+	 <!-- 전체 완료 리뷰 목록에 대한 총 개수 -->
+  <select id="selectCompleteReviewCount" resultType="int" parameterType="map">
+    SELECT COUNT(*)
+    FROM (
+      SELECT b.BOARD_NO
+      FROM REVIEW r
+      INNER JOIN BOARD b ON r.BOARD_NO = b.BOARD_NO
+      INNER JOIN REQUEST req ON b.BOARD_NO = req.BOARD_NO
+      INNER JOIN CATEGORY c ON req.CATEGORY_ID = c.CATEGORY_ID
+      INNER JOIN REQUEST_SUPPORTER rs ON b.BOARD_NO = rs.BOARD_NO AND rs.REQUEST_CONFIRM = 'Y'
+      INNER JOIN MEMBER mClient ON b.MEMBER_NO = mClient.MEMBER_NO
+      WHERE req.REQUEST_STATUS = '완료'
+      <if test="helperId != null">
+         AND rs.MEMBER_NO = #{helperId}
+      </if>
+      <if test="helperNick != null and helperNick != ''">
+         AND mClient.MEMBER_NICKNAME LIKE '%' || #{helperNick} || '%'
+      </if>
+    )
+  </select>
+
+	<!-- 전체 완료 리뷰 목록 조회 (페이징 적용) -->
+  <select id="selectCompleteReviewListPaginated" resultMap="completeReviewList_rm" parameterType="map">
+  SELECT * FROM (
+    SELECT ROWNUM rnum, a.* FROM (
+      SELECT 
+        b.BOARD_NO,
+        b.BOARD_TITLE,
+        b.BOARD_CONTENT,
+        TO_CHAR(b.B_CREATE_DATE, 'YYYY-MM-DD HH24:MI:SS') AS B_CREATE_DATE,
+        req.REQUEST_PRICE,
+        r.REVIEW_CONTENT,
+        r.REVIEW_RATING,
+        mClient.PROFILE_IMG AS CLIENT_PROFILE,
+        mClient.MEMBER_NICKNAME AS CLIENT_NICK,
+        c.CATEGORY_NAME,
+        rs.MEMBER_NO AS HELPER_ID,
+        mHelper.MEMBER_NICKNAME AS HELPER_NICK,
+        mHelper.PROFILE_IMG AS SUPPORTER_PROFILE
+      FROM REVIEW r
+      INNER JOIN BOARD b ON r.BOARD_NO = b.BOARD_NO
+      INNER JOIN REQUEST req ON b.BOARD_NO = req.BOARD_NO
+      INNER JOIN CATEGORY c ON req.CATEGORY_ID = c.CATEGORY_ID
+      INNER JOIN REQUEST_SUPPORTER rs ON b.BOARD_NO = rs.BOARD_NO AND rs.REQUEST_CONFIRM = 'Y'
+      INNER JOIN MEMBER mClient ON b.MEMBER_NO = mClient.MEMBER_NO
+      INNER JOIN MEMBER mHelper ON rs.MEMBER_NO = mHelper.MEMBER_NO
+      WHERE req.REQUEST_STATUS = '완료'
+      <if test="helperId != null">
+         AND rs.MEMBER_NO = #{helperId}
+      </if>
+      <if test="helperNick != null and helperNick != ''">
+         AND mHelper.MEMBER_NICKNAME LIKE '%' || #{helperNick} || '%'
+      </if>
+      ORDER BY b.B_CREATE_DATE DESC
+    ) a
+    WHERE ROWNUM &lt;= #{offset} + #{limit}
+  )
+  WHERE rnum &gt; #{offset}
+</select>
+
+
+<select id="selectCompleteReviewListByHelperId" parameterType="int" resultMap="completeReviewList_rm">
+    SELECT 
+      b.BOARD_NO,
+      b.BOARD_TITLE,
+      b.BOARD_CONTENT,
+      TO_CHAR(b.B_CREATE_DATE, 'YYYY-MM-DD HH24:MI:SS') AS B_CREATE_DATE,
+      req.REQUEST_PRICE,
+      r.REVIEW_CONTENT,
+      r.REVIEW_RATING,
+      mClient.PROFILE_IMG AS CLIENT_PROFILE,
+      mClient.MEMBER_NICKNAME AS CLIENT_NICK,
+      c.CATEGORY_NAME,
+      rs.MEMBER_NO AS HELPER_ID,
+      mHelper.MEMBER_NICKNAME AS HELPER_NICK
+    FROM REVIEW r
+    INNER JOIN BOARD b ON r.BOARD_NO = b.BOARD_NO
+    INNER JOIN REQUEST req ON b.BOARD_NO = req.BOARD_NO
+    INNER JOIN CATEGORY c ON req.CATEGORY_ID = c.CATEGORY_ID
+    INNER JOIN REQUEST_SUPPORTER rs 
+         ON b.BOARD_NO = rs.BOARD_NO AND rs.REQUEST_CONFIRM = 'Y'
+    INNER JOIN MEMBER mClient ON b.MEMBER_NO = mClient.MEMBER_NO
+    INNER JOIN MEMBER mHelper ON rs.MEMBER_NO = mHelper.MEMBER_NO
+    WHERE req.REQUEST_STATUS = '완료'
+      AND rs.MEMBER_NO = #{helperId}
+    ORDER BY b.B_CREATE_DATE DESC
+</select>
+
+
+
+  <!-- (B) 헬퍼 닉네임 기준 조회 -->
+  <select id="selectCompleteReviewListByHelperNick" parameterType="string" resultMap="completeReviewList_rm">
+    SELECT 
+      b.BOARD_NO,
+      b.BOARD_TITLE,
+      b.BOARD_CONTENT,
+      TO_CHAR(b.B_CREATE_DATE, 'YYYY-MM-DD HH24:MI:SS') AS B_CREATE_DATE,
+      req.REQUEST_PRICE,
+      r.REVIEW_CONTENT,
+      r.REVIEW_RATING,
+      mClient.PROFILE_IMG AS CLIENT_PROFILE,
+      mClient.MEMBER_NICKNAME AS CLIENT_NICK,
+      c.CATEGORY_NAME,
+      rs.MEMBER_NO AS HELPER_ID,
+      mHelper.MEMBER_NICKNAME AS HELPER_NICK
+    FROM REVIEW r
+    INNER JOIN BOARD b ON r.BOARD_NO = b.BOARD_NO
+    INNER JOIN REQUEST req ON b.BOARD_NO = req.BOARD_NO
+    INNER JOIN CATEGORY c ON req.CATEGORY_ID = c.CATEGORY_ID
+    INNER JOIN REQUEST_SUPPORTER rs 
+         ON b.BOARD_NO = rs.BOARD_NO AND rs.REQUEST_CONFIRM = 'Y'
+    INNER JOIN MEMBER mClient ON b.MEMBER_NO = mClient.MEMBER_NO
+    INNER JOIN MEMBER mHelper ON rs.MEMBER_NO = mHelper.MEMBER_NO
+    WHERE req.REQUEST_STATUS = '완료'
+      AND mHelper.MEMBER_NICKNAME LIKE '%' || #{helperNick} || '%'
+    ORDER BY b.B_CREATE_DATE DESC
+</select>
+
+  <!-- (C) 전체 완료 리뷰 목록 조회 -->
+  <select id="selectCompleteReviewListAll" resultMap="completeReviewList_rm">
+    SELECT 
+      b.BOARD_NO,
+      b.BOARD_TITLE,
+      b.BOARD_CONTENT,
+      TO_CHAR(b.B_CREATE_DATE, 'YYYY-MM-DD HH24:MI:SS') AS B_CREATE_DATE,
+      req.REQUEST_PRICE,
+      r.REVIEW_CONTENT,
+      r.REVIEW_RATING,
+      mClient.PROFILE_IMG AS CLIENT_PROFILE,
+      mClient.MEMBER_NICKNAME AS CLIENT_NICK,
+      c.CATEGORY_NAME,
+      rs.MEMBER_NO AS HELPER_ID
+    FROM REVIEW r
+    INNER JOIN BOARD b ON r.BOARD_NO = b.BOARD_NO
+    INNER JOIN REQUEST req ON b.BOARD_NO = req.BOARD_NO
+    INNER JOIN CATEGORY c ON req.CATEGORY_ID = c.CATEGORY_ID
+    INNER JOIN REQUEST_SUPPORTER rs 
+         ON b.BOARD_NO = rs.BOARD_NO AND rs.REQUEST_CONFIRM = 'Y'
+    INNER JOIN MEMBER mClient ON b.MEMBER_NO = mClient.MEMBER_NO
+    WHERE req.REQUEST_STATUS = '완료'
+    ORDER BY b.B_CREATE_DATE DESC
+  </select>
+
+  <!-- (옵션) 리뷰 상세 조회 (개별 리뷰) -->
+  <select id="getReviewDetail" parameterType="int" resultMap="completeReviewList_rm">
+  SELECT 
+    b.BOARD_NO,
+    b.BOARD_TITLE,
+    b.BOARD_CONTENT,
+    TO_CHAR(b.B_CREATE_DATE, 'YYYY-MM-DD HH24:MI:SS') AS B_CREATE_DATE,
+    req.REQUEST_PRICE,
+    r.REVIEW_CONTENT,
+    r.REVIEW_RATING,
+    mClient.PROFILE_IMG AS CLIENT_PROFILE,
+    mClient.MEMBER_NICKNAME AS CLIENT_NICK,
+    c.CATEGORY_NAME,
+    rs.MEMBER_NO AS HELPER_ID,
+    mHelper.MEMBER_NICKNAME AS HELPER_NICK,
+    mHelper.PROFILE_IMG AS SUPPORTER_PROFILE
+  FROM REVIEW r
+  INNER JOIN BOARD b ON r.BOARD_NO = b.BOARD_NO
+  INNER JOIN REQUEST req ON b.BOARD_NO = req.BOARD_NO
+  INNER JOIN CATEGORY c ON req.CATEGORY_ID = c.CATEGORY_ID
+  INNER JOIN REQUEST_SUPPORTER rs ON b.BOARD_NO = rs.BOARD_NO AND rs.REQUEST_CONFIRM = 'Y'
+  INNER JOIN MEMBER mClient ON b.MEMBER_NO = mClient.MEMBER_NO
+  INNER JOIN MEMBER mHelper ON rs.MEMBER_NO = mHelper.MEMBER_NO
+  WHERE r.BOARD_NO = #{boardNo}
+  AND ROWNUM = 1
+</select>
+
+
+</mapper>

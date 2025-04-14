@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>의뢰 요청 게시판</title>
+
+    <link rel="stylesheet" href="../../resources/css/kds/requestBoardList.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- font awesome 라이브러리 추가 + key 등록 -->
+<script src="https://kit.fontawesome.com/c91aef3408.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+
+    </header>
+    <nav>
+        <h2>
+            <a href="/requestBoard/0?cp=1">홈</a> > 의뢰 종류
+        </h2>
+        <br>
+        <h3>요청 의뢰 종류</h3>
+        <br>
+        <h3>주요 카테고리</h3>
+        <ul>
+            
+            <li><img src="../../resources/images/kds/Design.png" alt=""><a href="/requestBoard/1?cp=1"> 취업 / 직무 / 입시</a></li>
+            <li><img src="../../resources/images/kds/Camera.png" alt=""><a href="/requestBoard/2?cp=1"> 영상 / 사진 / 음향</a></li>
+            <li><img src="../../resources/images/kds/Tools.png" alt=""><a href="/requestBoard/3?cp=1"> 설치 / 수리</a></li>
+            <li><img src="../../resources/images/kds/artistPalette.png" alt=""><a href="/requestBoard/4?cp=1"> 취미 / 자기계발</a></li>
+            <li><img src="../../resources/images/kds/hands.png" alt=""><a href="/requestBoard/5?cp=1"> 단순의뢰</a></li>
+
+        </ul>
+        <div class="searchDiv">
+
+            <div class="searchDetailDiv">
+                <div class="price">가격 </div>
+                <input type="text" name="minPrice" class="priceInput" placeholder="최소" autocomplete="off"> 
+                <input type="text" name="maxPrice" class="priceInput" placeholder="최대" autocomplete="off">
+                <div class="timeLimit">의뢰 기한</div>
+                <div class="region">위치</div>
+                <button id="searchRegionBtn">전국</button>
+                <div class="searchRegionDiv">
+                    <ul>
+                        <li><input type="checkbox" name="allRegion" id="regionAll" value="allRegion"> 전국</li>
+                        <li><input type="checkbox" name="regionSeoul" id="regionSeoul" value="regionSeoul"> 서울</li>
+                        <li><input type="checkbox" name="regionDaejeon" id="regionDaejeon" value="regionDaejeon"> 대전</li>
+                        <li><input type="checkbox" name="regionDaegu" id="regionDaegu" value="regionDaegu"> 대구</li>
+                        <li><input type="checkbox" name="regionBusan" id="regionBusan" value="regionBusan"> 부산</li>
+                    </ul>
+                </div>
+
+            </div>
+            <div>
+
+                <form action="#" method="GET">
+    
+                    <fieldset> <!-- form태그 내 영역 구분 -->
+    
+                        <!-- 
+                            input의 name 속성 == 제출 시 key
+                            input에 입력된 내용 == 제출 시 value
+    
+                            autocomplete="off" : 브라우저 제공 자동완성 off
+                        -->
+                        <input type="search" name="query" id="query"
+                        placeholder="검색어를 입력해주세요."
+                        autocomplete="off">
+    
+                        <!-- 검색 버튼 -->
+                        <!-- button type="submit" 이 기본값 -->
+                        
+                        <button id="searchBtn" class="fa-solid fa-magnifying-glass"></button>
+                    </fieldset>
+                    
+                </form>
+            </div>
+            <button id="searchCategoryBtn">제목</button>
+            <div class="searchCategoryDiv">
+                <ul>
+                    <li><input type="radio" name="searchCategory" id="searchTitle" value="searchTitle"> 제목</li>
+                    <li><input type="radio" name="searchCategory" id="serachRequester" value="serachRequester"> 의뢰인</li>
+                    <li><input type="radio" name="searchCategory" id="searchContent" value="searchContent"> 내용</li>
+                    <li><input type="radio" name="searchCategory" id="searchCondition" value="searchCondition"> 조건</li>
+                    <li><input type="radio" name="searchCategory" id="searchAll" value="searchAll"> 전체</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <section class="mainSection">
+            <aside class="sideBar">
+                <div class="sideCheckBox">
+                    <div class="checkBoxContent">
+                        <p>취업/직무/입시</p>
+                        <label><input type="checkbox" name="category" id="interviewCon" value="interview"> 면접 컨설팅</label>
+                        <label><input type="checkbox" name="category" id="jobCon" value="job"> 취업 컨설팅</label>
+                        <label><input type="checkbox" name="category" id="portfolioCon" value="portfolio"> 포트폴리오 컨설팅</label>
+                        <label><input type="checkbox" name="category" id="examCon" value="exam"> 입시 컨설팅</label>
+                    </div>
+                    <div class="checkBoxContent">
+                        <p>영상/사진/음향</p>
+                        <label><input type="checkbox" name="category" id="videoOut" value="video"> 영상 외주</label>
+                        <label><input type="checkbox" name="category" id="pictureOut" value="picture"> 사진 외주</label>
+                        <label><input type="checkbox" name="category" id="soundOut" value="sound"> 음향 외주</label>
+                    </div>
+                    <div class="checkBoxContent">
+                        <p>설치/수리</p>
+                        <label><input type="checkbox" name="category" id="homeAppliancesSet" value="homeAppliancesSet"> 가전제품 설치</label>
+                        <label><input type="checkbox" name="category" id="doorSet" value="doorSet"> 문/창문 설치</label>
+                        <label><input type="checkbox" name="category" id="boilerSet" value="boilerSet"> 수도/보일러/전기 설치</label>
+                    </div>
+                    <div class="checkBoxContent">
+                        <p>취미/자기계발</p>
+                        <label><input type="checkbox" name="category" id="instrumentLearn" value="instrumentLearn"> 악기</label>
+                        <label><input type="checkbox" name="category" id="sportLearn" value="sport"> 스포츠</label>
+                        <label><input type="checkbox" name="category" id="paintingLearn" value="paintingLearn"> 미술</label>
+                        <label><input type="checkbox" name="category" id="etcLearn" value="etcLearn"> 그 외</label>
+                    </div>
+                </div>
+            </aside>
+            <section class="requestBoardItemBox">
+                <div class="requestBoardItemDiv">
+                    <div class="requestBoardItem">
+                        <img src="../../resources/images/kds/Drone.png" alt="">
+                        <p>
+                            <span>드론 수리 요청합니다.</span>
+                            <span>서울</span>
+                            </p>
+                        <p>50,000원</p>
+                        <p>권대성</p>
+                        <p>2025-03-02까지.</p>
+                    </div>
+                    <div class="requestBoardItem">
+                        <img src="../../resources/images/kds/Drone.png" alt="">
+                            <p>
+                                <span>드론 수리 요청합니다.</span>
+                                <span>서울</span>
+                            </p>
+                        <p>50,000원</p>
+                        <p>권대성</p>
+                        <p>2025-03-02까지.</p>
+                    </div>
+                    <div class="requestBoardItem">
+                        <img src="../../resources/images/kds/Drone.png" alt="">
+                        <p>
+                            <span>드론 수리 요청합니다.</span>
+                            <span>서울</span>
+                            </p>
+                        <p>50,000원</p>
+                        <p>권대성</p>
+                        <p>2025-03-02까지.</p>
+                    </div>
+                </div>
+                <div class="requestBoardItemDiv">
+                    <div class="requestBoardItem">
+                        <img src="../../resources/images/kds/Drone.png" alt="">
+                        <p>
+                            <span>드론 수리 요청합니다.</span>
+                            <span>서울</span>
+                            </p>
+                        <p>50,000원</p>
+                        <p>권대성</p>
+                        <p>2025-03-02까지.</p>
+                    </div>
+                    <div class="requestBoardItem">
+                        <img src="../../resources/images/kds/Drone.png" alt="">
+                        <p>
+                            <span>드론 수리 요청합니다.</span>
+                            <span>서울</span>
+                            </p>
+                        <p>50,000원</p>
+                        <p>권대성</p>
+                        <p>2025-03-02까지.</p>
+                    </div>
+                    <div class="requestBoardItem">
+                        <img src="../../resources/images/kds/Drone.png" alt="">
+                        <p>
+                            <span>드론 수리 요청합니다.</span>
+                            <span>서울</span>
+                            </p>
+                        <p>50,000원</p>
+                        <p>권대성</p>
+                        <p>2025-03-02까지.</p>
+                    </div>
+                </div>
+                <div class="requestBoardItemDiv">
+                    <div class="requestBoardItem">
+                        <img src="../../resources/images/kds/Drone.png" alt="">
+                        <p>
+                            <span>드론 수리 요청합니다.</span>
+                            <span>서울</span>
+                            </p>
+                        <p>50,000원</p>
+                        <p>권대성</p>
+                        <p>2025-03-02까지.</p>
+                    </div>
+                    <div class="requestBoardItem">
+                        <img src="../../resources/images/kds/Drone.png" alt="">
+                        <p>
+                            <span>드론 수리 요청합니다.</span>
+                            <span>서울</span>
+                            </p>
+                        <p>50,000원</p>
+                        <p>권대성</p>
+                        <p>2025-03-02까지.</p>
+                    </div>
+                    <div class="requestBoardItem">
+                        <img src="../../resources/images/kds/Drone.png" alt="">
+                        <p>
+                            <span>드론 수리 요청합니다.</span>
+                            <span>서울</span>
+                            </p>
+                        <p>50,000원</p>
+                        <p>권대성</p>
+                        <p>2025-03-02까지.</p>
+                    </div>
+                </div>
+                <div class="requestBoardItemDiv">
+                    <div class="requestBoardItem">
+                        <img src="../../resources/images/kds/Drone.png" alt="">
+                        <p>
+                            <span>드론 수리 요청합니다.</span>
+                            <span>서울</span>
+                            </p>
+                        <p>50,000원</p>
+                        <p>권대성</p>
+                        <p>2025-03-02까지.</p>
+                    </div>
+                    <div class="requestBoardItem">
+                        <img src="../../resources/images/kds/Drone.png" alt="">
+                        <p>
+                            <span>드론 수리 요청합니다.</span>
+                            <span>서울</span>
+                            </p>
+                        <p>50,000원</p>
+                        <p>권대성</p>
+                        <p>2025-03-02까지.</p>
+                    </div>
+                    <div class="requestBoardItem">
+                        <img src="../../resources/images/kds/Drone.png" alt="">
+                        <p>
+                            <span>드론 수리 요청합니다.</span>
+                            <span>서울</span>
+                            </p>
+                        <p>50,000원</p>
+                        <p>권대성</p>
+                        <p>2025-03-02까지.</p>
+                    </div>
+                </div>
+                
+            </section>
+        </section>
+    </main>
+
+    <script src="../../resources/js//kds/requestBoardList.js"></script>
+</body>
+</html>
