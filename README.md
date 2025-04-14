@@ -22,7 +22,7 @@
 
 ---
 
-## 🚀 프로젝트 - [Haezo](https://github.com/hongsejong/project)
+## 🚀 프로젝트 - [Haezo](https://github.com/hongsejong/projectClone)
 
 > 프리랜서 의뢰인과 조력자를 연결하는 실전형 매칭 플랫폼
 
