@@ -22,11 +22,11 @@
 
 ---
 
-## 🚀 주요 프로젝트 - [Haezo](https://github.com/hongsejong/project)
+## 🚀 프로젝트 - [Haezo](https://github.com/hongsejong/project)
 
 > 프리랜서 의뢰인과 조력자를 연결하는 실전형 매칭 플랫폼
 
-### 🧩 주요 기능
+### 🧩 주요 구현 기능
 
 - 🛠 **관리자페이지**: 통계 시각화, 문의/신고 관리, 유저 자동 정지
 - 💬 **실시간 채팅**: 음성 인식 & 음성 합성 기능
@@ -65,7 +65,7 @@
 
 ## 📬 Contact
 
-- 📧 Email: hsj5577@naver.com  
+- 📧 Email: hsj3779@gmail.com  
 - 🐱 GitHub: [hongsejong](https://github.com/hongsejong)
 
 ---
